@@ -19,12 +19,12 @@
     <script type="text/javascript" src="static/script_runnable.js"></script>
 
     <!--brython-->
-    <script type="text/javascript"
-            src="static/Brython-3.9.2/brython.js">
-    </script>
-    <script type="text/javascript"
-            src="static/Brython-3.9.2/brython_stdlib.js">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.9.2/brython.min.js"
+            integrity="sha512-vZbQ0CAHrWkDIyn3VQejez+lxdSvsWuJhrWQVK+g+U3oQ3TM9K63rAwbI+iODLLNbnPkz3qzKkxGyD8PMhViPw=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.9.2/brython_stdlib.min.js"
+            integrity="sha512-JJ4ZmaIr9EoCSB5XQBafIuJ8ucSeg9UxAWhYpecDk4kC3azdP028eKKnXHLy/8KKg9zp77tjHCwTyJZoRl0vqg=="
+            crossorigin="anonymous"></script>
 
 </head>
 <body onLoad="brython(1)">
@@ -34,8 +34,8 @@
 <h3>last update: 05/17/2021</h3>
 <hr>
 <ul>
-<li><a href="index.html#1-">このページの目的</a></li>
-<li><a href="index.html#2-">本サイトの流れ</a></li>
+    <li><a href="index.html#1-">このページの目的</a></li>
+    <li><a href="index.html#2-">本サイトの流れ</a></li>
 </ul>
 
 <hr>
@@ -362,6 +362,7 @@ for btn in document.select('.run-button'):
     btn.bind('click', run)
     # set attribute python_code, used when button is hit
     btn.elt = btn.nextElementSibling
+
 </script>
 
 </body>
