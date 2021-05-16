@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ながた の やるだけPython</title>
+
+    <!--syntax highlight-->
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+
+    <!--style-->
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/dracula.css">
+
+    <!--create run button-->
+    <script type="text/javascript" src="static/script_runnable.js"></script>
+
+    <!--brython-->
+    <script type="text/javascript"
+            src="static/Brython-3.9.2/brython.js">
+    </script>
+    <script type="text/javascript"
+            src="static/Brython-3.9.2/brython_stdlib.js">
+    </script>
+
+</head>
+<body onLoad="brython(1)">
+<h1 id="title">やるだけPython</h1>
+<h3 id="author">Yamato Nagata</h3>
+<h3 id="email"><a href="mailto:chickenwingswillfly@gmail.com">chickenwingswillfly@gmail.com</a></h3>
+<h3>last update: 05/17/2021</h3>
+<hr>
+<ul>
+<li><a href="index.html#1-">このページの目的</a></li>
+<li><a href="index.html#2-">本サイトの流れ</a></li>
+</ul>
+
+<hr>
+<h1 id="1-">1. プリミティブ型とは</h1>
+<p>まずプリミティブが何かを説明する前に、その修飾語が掛かっている&quot;型&quot;とは何かを説明する必要があります。</p>
+<p>うるせえ！プログラムが内部でどうなってるかなんて豆知識興味ねえ！という方は、<a href="#1.2-">1.2</a>まで飛ばしていただいても大丈夫です。</p>
+<h2 id="1-1-">1.1 型とは</h2>
+<p>プログラムはすべてコンピュータの内部で実行されていますから、当然それは電気で動いていることになります。
+では、電気でどうやって普段私たちが見ているようなYoutubeの動画や音楽、このページを見ているあなたのブラウザは表現されているのでしょう。</p>
+<p>実は、こういった情報(データ)は、電気的な信号のオンオフで表現されています。数えきれないほどの部屋がコンピュータの中にあって、それぞれの部屋が「電圧が高いバチバチの状態」か「電圧が低いショボショボの状態か」の組み合わせになってるということですね。</p>
+<p>1つの部屋があれば、バチバチとショボショボの2種類の状態が表現できます。2つの部屋があれば、2種類×2種類で4通り、3つの部屋があれば2種類×2種類×2種類で8通り...という風に、<code>2の(部屋の数)乗</code>の表現ができるようになります。</p>
+<p>部屋の数が少なければ表現できる数は少なく無いように見えますが、実際にはとてつもない程の表現ができます。<br>部屋の数を n として、すこし表を作ってみました。</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th style="text-align:center">2^n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align:center">16</td>
+</tr>
+<tr>
+<td>8</td>
+<td style="text-align:center">256</td>
+</tr>
+<tr>
+<td>16</td>
+<td style="text-align:center">65536</td>
+</tr>
+<tr>
+<td>32</td>
+<td style="text-align:center">4294967296</td>
+</tr>
+<tr>
+<td>64</td>
+<td style="text-align:center">18446744073709551616</td>
+</tr>
+<tr>
+<td>128</td>
+<td style="text-align:center">340282366920938463463374607431768211456</td>
+</tr>
+</tbody>
+</table>
+<p>どうでしょう？
+日本の人口を1億3000万人としても、すべての人に異なる状態を割り当てるには、部屋の数がたったの30個で済んでしまうのです。</p>
+<p>ちょっと脱線しましたが、つまるところ、コンピュータのデータというのはこういった部屋の状態の組み合わせです。
+用語的には、この部屋を<strong>ビット</strong>という単位で数え、コンピュータは電圧の高い状態を<strong>1</strong>、低い状態を<strong>0</strong>とみなします。
+たとえば、<em>1001</em>は4ビットの値で、<em>イチ ゼロ ゼロ イチ</em>という風に読みます。
+もしこれを<em>センジュウイチ</em>という風に読んでしまうと、普通の10進数と見分けがつきませんので、混同しないようにしましょう。</p>
+<p>さて、コンピュータはこのビットデータを情報として読むわけですが、これが果たして整数を表すビット列(ビットの塊)なのか、文字を表すビット列なのか、どう判断するのでしょうか？</p>
+<p>ここで出てくるのが<strong>型</strong>の考えです。つまり<br>&quot;1000110は数字の70かもしれないし、文字列の&#39;F&#39;かもしれない。けれど、さっきプログラムの中でこの値は整数として扱うと決めたから、整数です！&quot;<br>といったように、<strong>そのデータをどういう扱いとするか</strong>を定めたのが型です。</p>
+<h2 id="1-2-">1.2 プリミティブとは</h2>
+<p>プリミティブとは、Primitive(原始的)のことです。では、原始的な型とはなんでしょうか。</p>
+<p>wikipediaによると</p>
+<blockquote>
+<p>プリミティブ型（プリミティブがた 英語: primitive data type、プリミティブデータ型）は、データ型の1分類である。理論計算機科学的に代数的データ型によって考えれば「そのデータ型の定義の中に部分として他の型を含まないような型」がプリミティブ型であるが、Javaにおいて型が「primitive types（プリミティブ型）とreference type（参照型）」に二分されることにひきずられたと思われる2分法などが信じられていることも多い。<br>この記事におけるここから先の説明は、最初に説明した理論的な分類に従ったものではなく、よく信じられているらしい「プログラミング言語によって提供されるデータ型であり基本的な要素である。対する語は複合型という。言語やその実装に依存して、プリミティブ型がコンピュータメモリ上のオブジェクトと一対一対応のときもあれば、そうでないときもある。組み込み型もしくは基本型とも呼ぶ。」という解釈に従ったものである。</p>
+<p>-- <cite><a href="https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AA%E3%83%9F%E3%83%86%E3%82%A3%E3%83%96%E5%9E%8B">プリミティブ型</a></cite></p>
+</blockquote>
+<p>難しい言葉が並びましたが、要は「プログラミング言語自体が扱わせてくれる、特に基本的な型」のことです。
+Pythonではこれを<a href="https://docs.python.org/ja/3/library/stdtypes.html">組み込み型</a>(言語設計に直接組み込まれている型)と言います。
+これには複数ありますが、特に言語の中核をなす型をピックアップしました。</p>
+<p>まず整数を表す<em>int</em>, 浮動小数点数を表す<em>float</em>, 複素数を表す<em>complex</em><br>様々なデータをまとめて管理するもの(シーケンス)のうち、変更可能な<em>list</em>, 変更不可能な<em>tuple</em><br>文字列を表す<em>str</em><br>数学的な集合演算ができる<em>set</em>
+辞書のような使い方ができる<em>dict</em>  </p>
+<p>です。</p>
+<p>あなたが実際にプログラムを実行して、この項目で述べているような結果になるかを確認するために、値の型を確認するための方法を先に教えておきます。<br><code>type(5)</code>のように<code>type()</code>の()の中に型を知りたいものを入力することで、その型を知ることができます。</p>
+<p><code>5</code>は<code>int</code>型ですから、実行結果は</p>
+<pre><button class="run-button">RUN</button><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">type</span>(5)</span>
+<span class="hljs-meta"># &lt;class 'int'&gt;</span>
+</code></pre>
+<p>となります。<em>class</em>についてはのちに述べますので、今はわからなくても大丈夫です。</p>
+<p>まずは、数値を表す上の3つから見ていきましょう。</p>
+<h1 id="2-">2. 様々なデータ型</h1>
+<h2 id="2-1-">2.1 数値型</h2>
+<h3 id="2-1-1-int">2.1.1 int</h3>
+<p>&#39;integer&#39;(整数)の略でintとなっています。
+あなたのコンピュータの上の方(あるいはスマホなら...どこでしょう？)についている数字がそれです！その10個のキートップを自由自在に押すことで、あなたはint型の使い手初心者になれます。  </p>
+<p>以下のものはすべて有効なint型のデータです</p>
+<pre><button class="run-button">RUN</button><code class="lang-python"><span class="hljs-number">1</span>
+<span class="hljs-number">42</span>
+<span class="hljs-number">763</span>
+<span class="hljs-number">315</span>
++<span class="hljs-number">100</span>
+<span class="hljs-number">-100</span>
+<span class="hljs-number">99999999999999999999999999</span>
+</code></pre>
+<p>ただし、以下のものは正しくありません</p>
+<pre><button class="run-button">RUN</button><code class="lang-python"><span class="hljs-number">01</span>
+# <span class="hljs-number">0</span>から始めることはできません
+
+<span class="hljs-number">40</span>,<span class="hljs-number">500</span>,<span class="hljs-number">500</span>
+# 残念ですが、見やすさのためにカンマを挿入することはできません。かわりにアンダースコア(_)を使ってください
+# 正) <span class="hljs-number">40</span>_500_500
+</code></pre>
+<p>私たちが日頃計算を行うように、Pythonでも整数同士の計算をすることができます</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Pythonコード</th>
+<th style="text-align:center">結果の型</th>
+<th style="text-align:center">人間の記法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">a + b</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">a + b</td>
+</tr>
+<tr>
+<td style="text-align:center">a - b</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">a - b</td>
+</tr>
+<tr>
+<td style="text-align:center">a * b</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">a × b</td>
+</tr>
+<tr>
+<td style="text-align:center">a ** b</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">a ^ b</td>
+</tr>
+<tr>
+<td style="text-align:center">a / b</td>
+<td style="text-align:center">float</td>
+<td style="text-align:center">a ÷ b</td>
+</tr>
+<tr>
+<td style="text-align:center">a // b</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">a ÷ b の商</td>
+</tr>
+<tr>
+<td style="text-align:center">a % b</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">a ÷ b の剰余</td>
+</tr>
+</tbody>
+</table>
+<p>という風に計算できます。計算の優先順位は　　
+　<em>* &gt; ( </em>, /, //, % ) &gt; ( +, - )<br>となっており、同じ優先順位の間では左のものを優先します。</p>
+<p>以下のコードと、その実行結果をその真下に記入しています。</p>
+<pre><button class="run-button">RUN</button><code class="lang-python"><span class="hljs-number">1</span> + <span class="hljs-number">1</span>
+# <span class="hljs-number">2</span>
+
+<span class="hljs-number">23</span> - <span class="hljs-number">123</span>
+# <span class="hljs-number">-100</span>
+
+<span class="hljs-number">3</span> ** <span class="hljs-number">3</span>
+# <span class="hljs-number">27</span>
+
+<span class="hljs-number">3</span> ** <span class="hljs-number">0</span>
+# <span class="hljs-number">1</span>
+
+<span class="hljs-number">120</span> * <span class="hljs-number">15</span>
+# <span class="hljs-number">1800</span>
+
+<span class="hljs-number">15</span> / <span class="hljs-number">3</span>
+# <span class="hljs-number">5.0</span>
+
+<span class="hljs-number">365</span> / <span class="hljs-number">7</span>
+# <span class="hljs-number">52.142857142857146</span>
+
+<span class="hljs-number">365</span> <span class="hljs-comment">// 7</span>
+# <span class="hljs-number">52</span>
+
+<span class="hljs-number">365</span> % <span class="hljs-number">7</span>
+# <span class="hljs-number">1</span>
+
+(<span class="hljs-number">42</span> + <span class="hljs-number">2</span>) * (<span class="hljs-number">32</span> - <span class="hljs-number">4</span>)
+# <span class="hljs-number">1232</span>
+</code></pre>
+<p><code>15 / 3</code>と<code>365 / 7</code>の答えが小数になりましたね！これについては<em>float</em>で述べますので、しばしお待ちください...</p>
+<p>さて、こういった計算の中にもやってはいけないことがあります。それは、ゼロで数字を割ること(ゼロ除算)です。</p>
+<pre><button class="run-button">RUN</button><code class="lang-python"><span class="hljs-number">500</span> / <span class="hljs-number">0</span>
+<span class="hljs-meta"># ZeroDivisionError: division by zero</span>
+
+<span class="hljs-number">0</span> <span class="hljs-comment">// 0</span>
+<span class="hljs-meta"># ZeroDivisionError: division by zero</span>
+<span class="hljs-meta"># 0 を 0 で割るのもダメです</span>
+
+<span class="hljs-number">500</span> % <span class="hljs-number">0</span>
+<span class="hljs-meta"># ZeroDivisionError: integer division or modulo by zero</span>
+</code></pre>
+<p>こういった、実行してみないとわからないダメなことというのもままありますので、気を付けてください。</p>
+<h3 id="2-1-1-float">2.1.1 float</h3>
+<p>&#39;floating point number&#39;(浮動小数点数)の略でfloatとなっています。
+浮動小数点数... なかなかややこしい響きですが「点がふわふわと動く数値」ですから、これはつまり、小数のある数字の「点」に着目してつけられた値ですね。</p>
+<p>以下のものはすべて有効なfloat型のデータです</p>
+<pre><button class="run-button">RUN</button><code class="lang-python"><span class="hljs-number">1.0</span>
+<span class="hljs-number">1.1</span>
+<span class="hljs-number">1.0000000000001</span>
+<span class="hljs-number">-300.0</span>
+<span class="hljs-number">1.41421356</span>
+
+<span class="hljs-number">512.</span>
+# <span class="hljs-number">512.0</span> と同じ
+
+<span class="hljs-number">.512</span>
+# <span class="hljs-number">0.512</span>
+
+<span class="hljs-number">-.512</span>
+# <span class="hljs-number">-0.512</span>
+
+<span class="hljs-number">3e2</span>
+# <span class="hljs-number">3</span> * (<span class="hljs-number">10</span> ** <span class="hljs-number">2</span>) = <span class="hljs-number">300</span>
+
+<span class="hljs-number">3e-2</span>
+# <span class="hljs-number">3</span> * (<span class="hljs-number">10</span> ** <span class="hljs-number">-2</span>) = <span class="hljs-number">0.03</span>
+</code></pre>
+<p>ただし、以下のものは正しくありません</p>
+<pre><button class="run-button">RUN</button><code class="lang-python"><span class="hljs-number">01.001</span>
+# 整数部が<span class="hljs-number">0</span>ではない場合に、<span class="hljs-number">0</span>から始めることはできません
+# 正) <span class="hljs-number">1.001</span>
+
+.
+# <span class="hljs-number">0.0</span> を表現するために整数部と小数部両方は省略できません
+# 正) <span class="hljs-number">0.0</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">.0</span>
+
+<span class="hljs-number">5e2</span><span class="hljs-number">.3</span>
+# 指数表記の際に小数を用いることはできません
+# 正) <span class="hljs-number">5</span> * (<span class="hljs-number">10</span> ** <span class="hljs-number">2.3</span>)
+</code></pre>
+<p>intと同様に、四則計算などを行うことができます</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Pythonコード</th>
+<th style="text-align:center">結果の型</th>
+<th style="text-align:center">人間の記法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">a + b</td>
+<td style="text-align:center">float</td>
+<td style="text-align:center">a + b</td>
+</tr>
+<tr>
+<td style="text-align:center">a - b</td>
+<td style="text-align:center">float</td>
+<td style="text-align:center">a - b</td>
+</tr>
+<tr>
+<td style="text-align:center">a * b</td>
+<td style="text-align:center">float</td>
+<td style="text-align:center">a × b</td>
+</tr>
+<tr>
+<td style="text-align:center">a ** b</td>
+<td style="text-align:center">float</td>
+<td style="text-align:center">a ^ b</td>
+</tr>
+<tr>
+<td style="text-align:center">a / b</td>
+<td style="text-align:center">float</td>
+<td style="text-align:center">a ÷ b</td>
+</tr>
+<tr>
+<td style="text-align:center">a // b</td>
+<td style="text-align:center">float</td>
+<td style="text-align:center">a ÷ b の商</td>
+</tr>
+<tr>
+<td style="text-align:center">a % b</td>
+<td style="text-align:center">float</td>
+<td style="text-align:center">a ÷ b の剰余</td>
+</tr>
+</tbody>
+</table>
+<p><code>1.2 - 0.2</code>のように答えが整数になる場合でも、元の式のどちらか一方でもfloatの時は答えもfloatになることに注意してください。</p>
+
+<script type="text/python3">
+import sys
+from interpreter import Interpreter
+
+from browser import window, document, html, highlight
+def run(ev):
+    before_height = int(window.document.documentElement.scrollTop)
+    window.document.documentElement.scrollTop = 0
+    while not document.querySelector('textarea'):
+        try:
+            while document.querySelector('.brython-dialog-main'):
+                document.querySelector('.brython-dialog-main').remove()
+            Interpreter()
+
+            class MyOutput:
+                def __init__(self):
+                    self.console = document.querySelector('textarea')
+
+                def write(self, text):
+                    self.console.value += text
+
+            sys.stdout = MyOutput()
+            break
+        except:
+            pass
+
+    window.document.documentElement.scrollTop = before_height
+    interpreter = document.querySelector('textarea')
+    interpreter.spellcheck = False
+
+    interpreter.value = '>>> '
+    for line in ev.target.elt.text.strip().split('\n'):
+        if line.strip().startswith('#'):
+            continue
+        interpreter.value += line
+        event = window.KeyboardEvent.new("keypress", {'keyCode': 13})
+        interpreter.dispatchEvent(event)
+
+for btn in document.select('.run-button'):
+    btn.bind('click', run)
+    # set attribute python_code, used when button is hit
+    btn.elt = btn.nextElementSibling
+</script>
+
+</body>
+</html>

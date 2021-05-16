@@ -1,0 +1,85 @@
+body {
+    color: #353535;
+    background: #ffffff;
+
+    font-size: 16px;
+    line-height: 1.7;
+
+    max-width: 45em;
+
+    padding: 1em;
+    margin: auto;
+}
+
+#title {
+    font-size: 3em;
+    margin: 2em auto 0.5em auto;
+
+    text-align: center;
+}
+
+h3 {
+    text-align: right;
+}
+
+h3 > a {
+    text-decoration: none;
+
+    color: #353535;
+}
+
+code {
+    background: #282a36;
+    color: #f8f8f2;
+
+    padding: 0.2em 0.3em;
+    margin: auto 0.15em;
+}
+
+.run-button {
+    position: absolute;
+    top: 0;
+    right: 0.15em;
+    font-size: 1.3em;
+    padding: 0.3em 0.6em;
+
+    background: #2e8f47;
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+}
+
+pre {
+    position: relative;
+}
+
+.brython-dialog-main {
+    position: fixed !important;
+}
+
+.brython-dialog-close {
+
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+}
+
+blockquote {
+    background: #f6f6f6;
+    padding: 2em;
+}
+
+td {
+    padding-left: 2em;
+    min-width: 20%;
+}
+
+tr {
+    border-bottom: solid 1px #8f8f8f;
+    padding-bottom: 0.5em;
+}
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+}

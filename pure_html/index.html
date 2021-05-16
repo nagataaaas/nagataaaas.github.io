@@ -1,0 +1,36 @@
+<h1 id="1-">1. このページの目的</h1>
+<p>このページは、主に初めてPythonに触れるプログラミング初心者の方を対象に、
+不自由なくPythonを使えるようになることを目的にしています。</p>
+<p>不自由なくというとその道のりは長いように聞こえるかもしれませんが、実際のところ、それは人によります。
+メモリやポインタの概念をうっすらとでも理解していればゴールはぐっと近づきますし、
+逆に今まで全くコンピュータに触れたことがないという方であれば大変かもしれません。
+Pythonを深く理解するためには、こういった知識が必要になってくる部分がある(とくにlistに顕著)と私は思います。</p>
+<p>初心者の方がなんとなくでPythonを理解したつもりになって次のセクションに進みそこでつまづくという光景を何度となく見てきましたので、
+そういったことが無いよう、できるだけ寄り添ってPythonに馴染んでいただくために
+時に1段低レイヤー(ハードウェアに近いことを低レイヤーといいます)寄りの話題に触れることもあるかと思いますが、
+「ふーん、そうなんだ」程度でかまいませんので、お付き合いいただきたいと思います(とはいっても、C言語の表面を撫でる程度です)。</p>
+<p>では前置きもほどほどにして、内容へと移っていきましょう</p>
+<h1 id="2-">2. 本サイトの流れ</h1>
+<p>基本的には目次通りに進んでいただくことをお勧めします。
+ページでは、それ以前に述べた内容はすでに学んだ前提で進みますので、途中から読む場合は適宜遡っていただく必要が出るかもしれません。
+ある程度複雑な内容に再度触れる場合はそれについて解説した項目へのリンクをつけるようにします。</p>
+<p>また、プログラムを扱うという性質上、コードの一部分に触れるような言及方法の際は</p>
+<blockquote>
+<p>さて、この変数<code>x</code>は現在<code>3</code>という<code>int</code>になっています。</p>
+</blockquote>
+<p>という風に表記します。<br>ある程度長いプログラムであったり、読者の方に実行をしていただきたいコードの場合</p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> math
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">is_prime</span><span class="hljs-params">(number)</span>:</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">2</span>, math.ceil(math.sqrt(number))+<span class="hljs-number">1</span>):
+        <span class="hljs-keyword">if</span> number % i == <span class="hljs-number">0</span>:
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">False</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">True</span>
+
+print(<span class="hljs-string">'19139 is'</span>, <span class="hljs-string">'prime'</span> <span class="hljs-keyword">if</span> is_prime(<span class="hljs-number">19139</span>) <span class="hljs-keyword">else</span> <span class="hljs-string">'not prime'</span>)
+<span class="hljs-comment"># 19139 is prime</span>
+</code></pre>
+<p>のように表記します。コードの右上の<code>RUN</code>を押下することで、webページ上でコードを実行することができます。現在は今書いたようなコードの内容は全くわからなくても大丈夫です。</p>
+<p>章の終わりには読者の皆さんが理解できているか自分自身でチェックするための問題ページを用意しています。<br>そのページでは、コードを編集して実行することができるようになっていますので、ぜひいろいろ試してみてください。</p>
+<p>それでは早速次の章へまいりましょう。</p>
+<p><a href="primitive.html">1章. プリミティブ型</a></p>
