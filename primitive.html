@@ -25,9 +25,9 @@
 </head>
 <body onLoad="brython(1)">
 <h1 id="title">やるだけPython</h1>
-<h3 id="author">Yamato Nagata</h3>
-<h3 id="email"><a href="mailto:chickenwingswillfly@gmail.com">chickenwingswillfly@gmail.com</a></h3>
-<h3>last update: 05/17/2021</h3>
+<h3 id="author" class="right">Yamato Nagata</h3>
+<h3 id="email" class="right"><a href="mailto:chickenwingswillfly@gmail.com">chickenwingswillfly@gmail.com</a></h3>
+<h3 class="right">last update: 05/17/2021</h3>
 <hr>
 <ul>
     <li><a href="index.html#1-">このページの目的</a></li>
@@ -37,7 +37,7 @@
 <hr>
 <h1 id="1-">1. プリミティブ型とは</h1>
 <p>まずプリミティブが何かを説明する前に、その修飾語が掛かっている&quot;型&quot;とは何かを説明する必要があります。</p>
-<p>うるせえ！プログラムが内部でどうなってるかなんて豆知識興味ねえ！という方は、<a href="#1.2-">1.2</a>まで飛ばしていただいても大丈夫です。</p>
+<p>うるせえ！プログラムが内部でどうなってるかなんて豆知識興味ねえ！という方は、<a href="#1-2-">1.2</a>まで飛ばしていただいても大丈夫です。</p>
 <h2 id="1-1-">1.1 型とは</h2>
 <p>プログラムはすべてコンピュータの内部で実行されていますから、当然それは電気で動いていることになります。
 では、電気でどうやって普段私たちが見ているようなYoutubeの動画や音楽、このページを見ているあなたのブラウザは表現されているのでしょう。</p>
@@ -70,19 +70,19 @@
 </tr>
 <tr>
 <td>16</td>
-<td style="text-align:center">65536</td>
+<td style="text-align:center">65,536</td>
 </tr>
 <tr>
 <td>32</td>
-<td style="text-align:center">4294967296</td>
+<td style="text-align:center">4,294,967,296</td>
 </tr>
 <tr>
 <td>64</td>
-<td style="text-align:center">18446744073709551616</td>
+<td style="text-align:center">18,446,744,073,709,551,616</td>
 </tr>
 <tr>
 <td>128</td>
-<td style="text-align:center">340282366920938463463374607431768211456</td>
+<td style="text-align:center">340,282,366,920,938,463,463,374,607,431,768,211,456</td>
 </tr>
 </tbody>
 </table>
@@ -104,8 +104,8 @@
 <p>難しい言葉が並びましたが、要は「プログラミング言語自体が扱わせてくれる、特に基本的な型」のことです。
 Pythonではこれを<a href="https://docs.python.org/ja/3/library/stdtypes.html">組み込み型</a>(言語設計に直接組み込まれている型)と言います。
 これには複数ありますが、特に言語の中核をなす型をピックアップしました。</p>
-<p>まず整数を表す<em>int</em>, 浮動小数点数を表す<em>float</em>, 複素数を表す<em>complex</em><br>様々なデータをまとめて管理するもの(シーケンス)のうち、変更可能な<em>list</em>, 変更不可能な<em>tuple</em><br>文字列を表す<em>str</em><br>数学的な集合演算ができる<em>set</em>
-辞書のような使い方ができる<em>dict</em>  </p>
+<p>まず整数を表す<code>int</code>, 浮動小数点数を表す<code>float</code>, 複素数を表す<code>complex</code><br>様々なデータをまとめて管理するもの(シーケンス)のうち、変更可能な<code>list</code>, 変更不可能な<code>tuple</code><br>文字列を表す<code>str</code><br>数学的な集合演算ができる<code>set</code>
+辞書のような使い方ができる<code>dict</code> </p>
 <p>です。</p>
 <p>あなたが実際にプログラムを実行して、この項目で述べているような結果になるかを確認するために、値の型を確認するための方法を先に教えておきます。<br><code>type(5)</code>のように<code>type()</code>の()の中に型を知りたいものを入力することで、その型を知ることができます。</p>
 <p><code>5</code>は<code>int</code>型ですから、実行結果は</p>
@@ -130,11 +130,13 @@ Pythonではこれを<a href="https://docs.python.org/ja/3/library/stdtypes.html
 </code></pre>
 <p>ただし、以下のものは正しくありません</p>
 <pre><button class="run-button">RUN</button><code class="lang-python"><span class="hljs-number">01</span>
-# <span class="hljs-number">0</span>から始めることはできません
+<span class="hljs-meta"># 0から始めることはできません</span>
 
 <span class="hljs-number">40</span>,<span class="hljs-number">500</span>,<span class="hljs-number">500</span>
-# 残念ですが、見やすさのためにカンマを挿入することはできません。かわりにアンダースコア(_)を使ってください
-# 正) <span class="hljs-number">40</span>_500_500
+<span class="hljs-meta"># 残念ですが、見やすさのためにカンマを挿入することはできません</span>
+<span class="hljs-meta"># カンマを用いると、全く別の型と認識されます</span>
+<span class="hljs-meta"># かわりにアンダースコア(_)を使ってください</span>
+<span class="hljs-meta"># 正) 40_500_500</span>
 </code></pre>
 <p>私たちが日頃計算を行うように、Pythonでも整数同士の計算をすることができます</p>
 <table>
@@ -314,7 +316,7 @@ Pythonではこれを<a href="https://docs.python.org/ja/3/library/stdtypes.html
 </tr>
 </tbody>
 </table>
-<p><code>1.2 - 0.2</code>のように答えが整数になる場合でも、元の式のどちらか一方でもfloatの時は答えもfloatになることに注意してください。</p>
+<p><code>1.2 - 0.2</code>のように答えが整数になる場合であっても、元の式のどちらか一方がfloatの時は答えもfloatになることに注意してください。</p>
 
 <script type="text/python3">
 import sys
