@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ながた の やるだけPython</title>
+    <script src="/static/js/coi-serviceworker.min.js"></script>
+
+    <!--syntax highlight-->
+    <link rel="stylesheet"
+          href="/static/cdn/highlight.min.css">
+    <script src="/static/cdn/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+
+    <!--jquery-->
+    <script src="/static/cdn/jquery.js"></script>
+    <script type="text/javascript" src="/static/cdn/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/static/cdn/jquery-ui.css">
+    <script src="/static/cdn/jquery.terminal.min.js"></script>
+    <link href="/static/cdn/jquery.terminal.min.css" rel="stylesheet">
+
+
+    <!--pyodide-->
+    <script src="/static/js/terminal.js"></script>
+
+    <!--style-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/dracula.css">
+    <link rel="stylesheet" href="/static/css/terminal.css">
+
+    <!--style-->
+    <script src="/static/js/navigate.js"></script>
+
+</head>
+<body>
+<div id="terminal-container">
+    <div id="terminal-window" class="hidden">
+
+        <div class="header">
+            <span> 🐍 Python Interpreter</span>
+            <button onclick="closeConsole()"><span class="close-btn">&#8211;</span></button>
+        </div>
+        <div id="terminal"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="navigate"> <span class="chapter"><a href="/はじめに/目的と流れ/index.html">はじめに</a></span>
+<span class="section"><a href="/はじめに/目的と流れ/index.html">目的と流れ</a></span>
+<span class="chapter"><a href="/とっかかり/学びに必要な知識/index.html">とっかかり</a></span>
+<span class="section"><a href="/とっかかり/学びに必要な知識/index.html">学びに必要な知識</a></span>
+<span class="chapter"><a href="/型/primitive型/型とは.html">型</a></span>
+<span class="section"><a href="/型/primitive型/型とは.html">primitive型</a></span>
+<span class="page"><a href="/型/primitive型/型とは.html">型とは</a></span>
+<span class="page selected"><a href="/型/primitive型/数値型.html">数値型</a></span>
+<span class="page"><a href="/型/primitive型/シーケンス.html">シーケンス</a></span>
+</div>
+    <div id="main">
+        <div id="top">
+            <h1 id="title">やるだけPython</h1>
+            <h3 id="author" class="right">Yamato Nagata</h3>
+            <h3 id="email" class="right"><a href="mailto:nagata@mail.nagata.pro">nagata@mail.nagata.pro</a>
+            </h3>
+            <h3 class="right">last update: 07/22/2022</h3>
+        </div>
+        <div id="content">
+            <div class="toc">
+<ul>
+<li><a href="#_1">数値型</a><ul>
+<li><a href="#int">int</a></li>
+<li><a href="#float">float</a></li>
+<li><a href="#complex">complex</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">数値型</h2>
+<h3 id="int">int</h3>
+<p>'integer'(整数)の略でintとなっています。
+あなたのキーボードの上の方(あるいはスマホなら...どこでしょう？)についている数字がそれです！その10個のキートップを自由自在に押すことで、あなたはint型の使い手初心者になれます。</p>
+<p>以下のものはすべて有効なint型のデータです</p>
+<div class="codehilite"><pre class="language-python"><span></span><code><span class="mi">1</span>
+<span class="mi">42</span>
+<span class="mi">763</span>
+<span class="mi">315</span>
+<span class="o">+</span><span class="mi">100</span>  <span class="c1"># これは数字だけの表現ではありませんね笑</span>
+<span class="o">-</span><span class="mi">100</span>
+<span class="mi">99999999999999999999999999</span>
+</code></pre></div>
+
+<p>ただし、以下のものは正しくありません</p>
+<div class="codehilite"><pre class="language-python"><span></span><code><span class="mi">01</span>
+<span class="c1"># 0から始めることはできません</span>
+
+<span class="mi">40</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span>
+<span class="c1"># 残念ですが、見やすさのためにカンマを挿入することはできません</span>
+<span class="c1"># カンマを用いると、全く別の型と認識されます</span>
+<span class="c1"># かわりにアンダースコア(_)を使ってください</span>
+<span class="c1"># 正) 40_500_500</span>
+</code></pre></div>
+
+<p>私たちが日頃計算を行うように、Pythonでも整数同士の計算をすることができます</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Pythonコード</th>
+<th style="text-align: center;">結果の型</th>
+<th style="text-align: center;">人間の記法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">a + b</td>
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">a + b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a - b</td>
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">a - b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a * b</td>
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">a × b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a ** b</td>
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">a ^ b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a / b</td>
+<td style="text-align: center;">float</td>
+<td style="text-align: center;">a ÷ b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a // b</td>
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">a ÷ b の商</td>
+</tr>
+<tr>
+<td style="text-align: center;">a % b</td>
+<td style="text-align: center;">int</td>
+<td style="text-align: center;">a ÷ b の剰余</td>
+</tr>
+</tbody>
+</table>
+<p>という風に計算できます。計算の優先順位は<br />
+<code>**</code> &gt; ( <code>*</code>, <code>/</code>, <code>//</code>, <code>%</code> ) &gt; ( <code>+</code>, <code>-</code> )<br />
+となっており、同じ優先順位の間では左のものを優先します。</p>
+<p>以下のコードと、その実行結果をその真下に記入しています。</p>
+<div class="codehilite"><pre class="language-python"><span></span><code><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="c1"># 2</span>
+
+<span class="mi">23</span> <span class="o">-</span> <span class="mi">123</span>
+<span class="c1"># -100</span>
+
+<span class="mi">3</span> <span class="o">**</span> <span class="mi">3</span>
+<span class="c1"># 27</span>
+
+<span class="mi">3</span> <span class="o">**</span> <span class="mi">0</span>
+<span class="c1"># 1</span>
+
+<span class="mi">120</span> <span class="o">*</span> <span class="mi">15</span>
+<span class="c1"># 1800</span>
+
+<span class="mi">15</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="c1"># 5.0</span>
+
+<span class="mi">365</span> <span class="o">/</span> <span class="mi">7</span>
+<span class="c1"># 52.142857142857146</span>
+
+<span class="mi">365</span> <span class="o">//</span> <span class="mi">7</span>
+<span class="c1"># 52</span>
+
+<span class="mi">365</span> <span class="o">%</span> <span class="mi">7</span>
+<span class="c1"># 1</span>
+
+<span class="p">(</span><span class="mi">42</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">32</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span>
+<span class="c1"># 1232</span>
+</code></pre></div>
+
+<p><code>15 / 3</code>と<code>365 / 7</code>の答えが小数になりましたね！これについては<em>float</em>で述べますので、しばしお待ちください...</p>
+<p>さて、こういった計算の中にもやってはいけないことがあります。それは、ゼロで数字を割ること(ゼロ除算)です。</p>
+<div class="codehilite"><pre class="language-python"><span></span><code><span class="mi">500</span> <span class="o">/</span> <span class="mi">0</span>
+<span class="c1"># ZeroDivisionError: division by zero</span>
+
+<span class="mi">0</span> <span class="o">//</span> <span class="mi">0</span>
+<span class="c1"># ZeroDivisionError: division by zero</span>
+<span class="c1"># 0 を 0 で割るのもダメです</span>
+
+<span class="mi">500</span> <span class="o">%</span> <span class="mi">0</span>
+<span class="c1"># ZeroDivisionError: integer division or modulo by zero</span>
+</code></pre></div>
+
+<p>こういった、実行してみないとわからないダメなことというのもままありますので、気を付けてください。</p>
+<blockquote>
+<p>int型の最大値・最小値について</p>
+<p>読者の中には、すでにC言語などの他の言語に触れていて、「intの最大値は2147483647とかそんな値ではなかったか」と思っている方もいらっしゃるかと思います。\
+実際、多くの言語ではそのように実装されていますが、ことPythonはその限りではありません。
+他の多くの言語でintの最大値が2147483647なのは、intの表現に32ビット使うからです。
+2^32 = 4294967296 で、+と-にいい感じに値を割り振った結果、-2147483648 ~ +2147483647 を表現できるようにしています。</p>
+<p>それぞれの状態の1つ1つに個別の数字を割り当てているということですね。</p>
+<p>しかし、Pythonではメモリ(コンピュータのデータを記憶する部分)の許す限り値を表現するために用いるビット数を増やすので、基本上限はありません。</p>
+<p>こういったデータを多倍長整数と呼びますが、これのおかげでオーバーフローなどと言った問題を回避することができるのですね。やったね！</p>
+</blockquote>
+<h3 id="float">float</h3>
+<p>'floating point number'(浮動小数点数)の略でfloatとなっています。
+浮動小数点数... なかなかややこしい響きですが「点がふわふわと動く数値」ですから、これはつまり、小数を持つ数字の「点」に着目してつけられた名前ですね。</p>
+<p>以下のものはすべて有効なfloat型のデータです</p>
+<div class="codehilite"><pre class="language-python"><span></span><code><span class="mf">1.0</span>
+<span class="mf">1.1</span>
+<span class="mf">1.0000000000001</span>
+<span class="o">-</span><span class="mf">300.0</span>
+<span class="mf">1.41421356</span>
+
+<span class="mf">512.</span>
+<span class="c1"># 512.0 と同じ</span>
+
+<span class="o">.</span><span class="mi">512</span>
+<span class="c1"># 0.512</span>
+
+<span class="o">-.</span><span class="mi">512</span>
+<span class="c1"># -0.512</span>
+
+<span class="mf">3e2</span>
+<span class="c1"># 3 * (10 ** 2) = 300.0</span>
+
+<span class="mf">3e-2</span>
+<span class="c1"># 3 * (10 ** -2) = 0.03</span>
+
+<span class="mf">001.001</span>
+<span class="c1"># intと違い、先頭に0を持ってくることが出来ます</span>
+</code></pre></div>
+
+<p>ただし、以下のものは正しくありません</p>
+<div class="codehilite"><pre class="language-python"><span></span><code><span class="o">.</span>
+<span class="c1"># 0.0 を表現するために整数部と小数部両方は省略できません</span>
+<span class="c1"># 正) 0.0, 0., .0</span>
+
+<span class="mf">5e2</span>
+<span class="o">.</span><span class="mi">3</span>
+<span class="c1"># 指数表記の際に小数を用いることはできません</span>
+<span class="c1"># 正) 5 * (10 ** 2.3)</span>
+</code></pre></div>
+
+<p>intと同様に、四則計算などを行うことができます</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Pythonコード</th>
+<th style="text-align: center;">結果の型</th>
+<th style="text-align: center;">人間の記法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">a + b</td>
+<td style="text-align: center;">float</td>
+<td style="text-align: center;">a + b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a - b</td>
+<td style="text-align: center;">float</td>
+<td style="text-align: center;">a - b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a * b</td>
+<td style="text-align: center;">float</td>
+<td style="text-align: center;">a × b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a ** b</td>
+<td style="text-align: center;">float</td>
+<td style="text-align: center;">a ^ b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a / b</td>
+<td style="text-align: center;">float</td>
+<td style="text-align: center;">a ÷ b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a // b</td>
+<td style="text-align: center;">float</td>
+<td style="text-align: center;">a ÷ b の商</td>
+</tr>
+<tr>
+<td style="text-align: center;">a % b</td>
+<td style="text-align: center;">float</td>
+<td style="text-align: center;">a ÷ b の剰余</td>
+</tr>
+</tbody>
+</table>
+<p><code>1.2 - 0.2</code>のように答えが整数になる場合であっても、元の式のどちらか一方がfloatの時は答えもfloatになることに注意してください。</p>
+<p>優先順位はintの時と同様です。</p>
+<div class="codehilite"><pre class="language-python"><span></span><code><span class="mf">1.0</span> <span class="o">+</span> <span class="mf">1.0</span>
+<span class="c1"># 2.0</span>
+
+<span class="mf">23.502</span> <span class="o">-</span> <span class="mf">123.500</span>
+<span class="c1"># -99.998</span>
+
+<span class="mf">3.229</span> <span class="o">**</span> <span class="mi">3</span>
+<span class="c1"># 33.666977989</span>
+
+<span class="mi">3</span> <span class="o">**</span> <span class="mf">0.</span>
+<span class="c1"># 1.0</span>
+
+<span class="mf">920.2</span> <span class="o">*</span> <span class="mi">15</span>
+<span class="c1"># 13803.0</span>
+
+<span class="mf">15.3</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="c1"># 5.1000000000000005</span>
+<span class="c1"># コンピュータでは、小さな値を表現しようとすると誤差が生じることがあります。</span>
+<span class="c1"># こういった誤差を生じさせない形で計算を行うには、*decimal*や*fractions*といった機能を用いる必要があります。</span>
+<span class="c1"># TODO: ライブラリに関する記述</span>
+
+<span class="mf">365.25</span> <span class="o">/</span> <span class="mi">7</span>
+<span class="c1"># 52.17857142857143</span>
+
+<span class="mf">365.0</span> <span class="o">//</span> <span class="mi">7</span>
+<span class="c1"># 52.0</span>
+
+<span class="mi">365</span> <span class="o">%</span> <span class="mf">7.0</span>
+<span class="c1"># 1.0</span>
+
+<span class="p">(</span><span class="mf">42.54</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">32</span> <span class="o">-</span> <span class="mf">4.2</span><span class="p">)</span>
+<span class="c1"># 1238.212</span>
+</code></pre></div>
+
+<p>intのように、 0と等しい値で除算することはできません</p>
+<div class="codehilite"><pre class="language-python"><span></span><code><span class="mf">0.0</span> <span class="o">/</span> <span class="mf">0.0</span>
+<span class="c1"># ZeroDivisionError: float division by zero</span>
+</code></pre></div>
+
+<h3 id="complex">complex</h3>
+<p>'complex number'(複素数)の略でcomplexとなっています。つまり、虚数に関する数値ですね。<br />
+正直、筆者はこの値を用いている業務的なプログラムを1度も見たことがありません。数学や工学の分野で用いそうな方以外は「そんなのもあったなぁ」程度で構わないと思います。</p>
+<p>一般的に複素数を表記しようとすると</p>
+<blockquote>
+<p>12 + i3</p>
+</blockquote>
+<p>のように表記すると思いますが、Pythonでは</p>
+<ul>
+<li>iではなくjを用いる</li>
+<li>数値の後ろにjをつける</li>
+</ul>
+<p>というルールがあります。</p>
+<p>以下のものはすべて有効なcomplex型のデータです</p>
+<div class="codehilite"><pre class="language-python"><span></span><code><span class="mi">1</span><span class="n">j</span>
+<span class="o">.</span><span class="mi">0</span><span class="n">j</span>
+<span class="mf">1.1</span><span class="n">j</span>
+<span class="mi">5</span> <span class="o">+</span> <span class="mi">3</span><span class="n">j</span>
+<span class="mf">3.4</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span>
+<span class="mi">1</span> <span class="o">+</span> <span class="mi">0</span><span class="n">j</span>
+</code></pre></div>
+
+<p>ただし、以下のものは正しくありません</p>
+<div class="codehilite"><pre class="language-python"><span></span><code><span class="o">.</span><span class="n">j</span>
+<span class="c1"># 0.0jのために、0を両方省略することはできません</span>
+<span class="c1"># なお、 0.0jと入力した場合でも、0jと解釈されます</span>
+<span class="c1"># 正) 0.0j, 0j</span>
+
+<span class="n">j</span>
+<span class="c1"># 1jの1を省略することはできません</span>
+<span class="c1"># 正) 1j</span>
+</code></pre></div>
+
+<p>一部の四則計算などを行うことができます</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Pythonコード</th>
+<th style="text-align: center;">結果の型</th>
+<th style="text-align: center;">人間の記法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">a + b</td>
+<td style="text-align: center;">complex</td>
+<td style="text-align: center;">a + b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a - b</td>
+<td style="text-align: center;">complex</td>
+<td style="text-align: center;">a - b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a * b</td>
+<td style="text-align: center;">complex</td>
+<td style="text-align: center;">a × b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a ** b</td>
+<td style="text-align: center;">complex</td>
+<td style="text-align: center;">a ^ b</td>
+</tr>
+<tr>
+<td style="text-align: center;">a / b</td>
+<td style="text-align: center;">complex</td>
+<td style="text-align: center;">a ÷ b</td>
+</tr>
+</tbody>
+</table>
+<p>計算に用いるどちらか一方でもcomplex型である場合、<code>//</code>と<code>%</code>を用いることは出来ないので注意してください。</p>
+<div class="codehilite"><pre class="language-python"><span></span><code><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span><span class="n">j</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="mi">3</span><span class="n">j</span> <span class="o">//</span> <span class="mi">3</span><span class="n">j</span>
+<span class="c1"># TypeError: can&#39;t take floor of complex number.</span>
+
+<span class="mi">5</span><span class="n">j</span> <span class="o">%</span> <span class="mi">2</span><span class="n">j</span>
+<span class="mi">5</span><span class="n">j</span> <span class="o">%</span> <span class="mi">2</span>
+<span class="c1"># TypeError: can&#39;t mod complex numbers.</span>
+</code></pre></div>
+        </div>
+    </div>
+</div>
+
+
+<!--inject Run button-->
+<script>
+    document.querySelectorAll('pre > code').forEach(e => {
+        const button = document.createElement('button');
+        button.classList.add('run-button');
+        button.innerText = 'RUN';
+        e.parentNode.insertBefore(button, e);
+    })
+</script>
+</body>
+</html>

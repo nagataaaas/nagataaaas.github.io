@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ながた の やるだけPython</title>
+    <script src="/static/js/coi-serviceworker.min.js"></script>
+
+    <!--syntax highlight-->
+    <link rel="stylesheet"
+          href="/static/cdn/highlight.min.css">
+    <script src="/static/cdn/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+
+    <!--jquery-->
+    <script src="/static/cdn/jquery.js"></script>
+    <script type="text/javascript" src="/static/cdn/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/static/cdn/jquery-ui.css">
+    <script src="/static/cdn/jquery.terminal.min.js"></script>
+    <link href="/static/cdn/jquery.terminal.min.css" rel="stylesheet">
+
+
+    <!--pyodide-->
+    <script src="/static/js/terminal.js"></script>
+
+    <!--style-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/dracula.css">
+    <link rel="stylesheet" href="/static/css/terminal.css">
+
+    <!--style-->
+    <script src="/static/js/navigate.js"></script>
+
+</head>
+<body>
+<div id="terminal-container">
+    <div id="terminal-window" class="hidden">
+
+        <div class="header">
+            <span> 🐍 Python Interpreter</span>
+            <button onclick="closeConsole()"><span class="close-btn">&#8211;</span></button>
+        </div>
+        <div id="terminal"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="navigate"> {{navigate}}</div>
+    <div id="main">
+        <div id="top">
+            <h1 id="title">やるだけPython</h1>
+            <h3 id="author" class="right">Yamato Nagata</h3>
+            <h3 id="email" class="right"><a href="mailto:nagata@mail.nagata.pro">nagata@mail.nagata.pro</a>
+            </h3>
+            <h3 class="right">last update: {{update}}</h3>
+        </div>
+        <div id="content">
+            {{content}}
+        </div>
+    </div>
+</div>
+
+
+<!--inject Run button-->
+<script>
+    document.querySelectorAll('pre > code').forEach(e => {
+        const button = document.createElement('button');
+        button.classList.add('run-button');
+        button.innerText = 'RUN';
+        e.parentNode.insertBefore(button, e);
+    })
+</script>
+</body>
+</html>

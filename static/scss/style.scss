@@ -1,0 +1,200 @@
+body {
+  color: #353535;
+  background: #ffffff;
+
+  font-size: 16px;
+  line-height: 1.7;
+
+
+  margin: auto;
+}
+
+#container {
+  display: grid;
+  grid-template-columns: 15em 1fr;
+}
+
+#navigate {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  border-right: 1px solid #daefff;
+  font-weight: bold;
+  position: fixed;
+  width: 12em;
+  height: 100%;
+  padding: 8em 2em 2em;
+
+  & > span {
+    line-height: 1em;
+    margin-bottom: 1em;
+
+    a {
+      text-decoration: none;
+      color: #a2a2a2;
+      transition-duration: 0.2s;
+      display: block;
+      line-break: anywhere;
+
+      &:hover {
+        color: #2c5688;
+      }
+    }
+
+    &.chapter {
+      a {
+        max-width: 14em;
+      }
+    }
+
+    &.section {
+      padding-left: 1.5em;
+
+      a {
+        max-width: 12.5em;
+      }
+    }
+
+    &.page {
+      padding-left: 3em;
+      font-weight: lighter;
+
+      a {
+        max-width: 11em;
+      }
+
+      &.selected > a {
+        color: #2c5688;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+#main {
+  grid-column: 2;
+  margin: 0 5% 2em 5%;
+
+  #top {
+    #title {
+      font-size: 3em;
+      margin: 1em auto 0.5em auto;
+
+      text-align: center;
+    }
+
+    h3 {
+      &.right {
+        text-align: right;
+      }
+
+      a {
+        text-decoration: none;
+        color: #353535;
+      }
+    }
+
+  }
+
+  #content {
+
+    div.toc {
+      border: 1px solid #e7e7e7;
+      border-radius: 1em;
+      &:before {
+        content: "目次";
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+        padding: 0.3em;
+        border-radius: 1em 1em 0 0;
+        background: #e8efef;
+      }
+
+      margin: 2em 0;
+      border-bottom: 1px solid #daefff;
+      font-size: 1.2em;
+
+      li {
+        list-style-type: none;
+      }
+
+      a {
+        text-decoration: none;
+        color: #449ec9;
+      }
+    }
+
+    h2 {
+      font-size: 1.8em;
+      border-left: 5px solid #2c5688;
+      padding-left: 1em;
+    }
+
+
+    h3 {
+      font-size: 1.3em;
+      border-left: 3px solid #6c82a2;
+      padding-left: 1em;
+    }
+
+
+    code {
+      background: #282a36;
+      color: #f8f8f2;
+
+      padding: 0.2em 0.3em;
+      margin: auto 0.15em;
+    }
+
+
+    pre {
+      position: relative;
+
+      button.run-button {
+        position: absolute;
+        top: 0;
+        right: 0.15em;
+        font-size: 1.3em;
+        padding: 0.2em 0.6em;
+
+        background: #2e8f47;
+        color: #ffffff;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+
+
+    blockquote {
+      background: #f6f6f6;
+      padding: 2em;
+      border-left: 5px solid #6aaa00;
+    }
+
+
+    table {
+      border-collapse: collapse;
+      margin: auto;
+
+
+      tr {
+        border-bottom: solid 1px #8f8f8f;
+        padding-bottom: 0.5em;
+
+        td {
+          padding-left: 2em;
+          min-width: 20%;
+        }
+      }
+    }
+
+
+    .cmd, .cmd div, .cmd span, .terminal, .terminal-output > :not(.raw) a, .terminal-output > :not(.raw) div, .terminal-output > :not(.raw) span {
+      font-size: 1em !important;
+    }
+  }
+}
+
