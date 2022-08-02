@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>ながた の やるだけPython</title>
-    <script src="/python/static/js/coi-serviceworker.js"></script>
+    <script src="coi-serviceworker.js"></script>
 
     <!--syntax highlight-->
     <link rel="stylesheet"
@@ -14,22 +14,22 @@
 
     <!--jquery-->
     <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
-    <script type="text/javascript" src="/python/static/js/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="/python/static/css/jquery-ui.css">
+    <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/static/css/jquery-ui.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery.terminal@2.23.0/js/jquery.terminal.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/jquery.terminal@2.23.0/css/jquery.terminal.min.css" rel="stylesheet">
 
 
     <!--pyodide-->
-    <script src="/python/static/js/terminal.js"></script>
+    <script src="/static/js/terminal.js"></script>
 
     <!--style-->
-    <link rel="stylesheet" href="/python/static/css/style.css">
-    <link rel="stylesheet" href="/python/static/css/dracula.css">
-    <link rel="stylesheet" href="/python/static/css/terminal.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/dracula.css">
+    <link rel="stylesheet" href="/static/css/terminal.css">
 
     <!--style-->
-    <script src="/python/static/js/navigate.js"></script>
+    <script src="/static/js/navigate.js"></script>
 
 </head>
 <body>
@@ -48,10 +48,11 @@
 <span class="section"><a href="/はじめに/目的と流れ/index.html">目的と流れ</a></span>
 <span class="chapter"><a href="/とっかかり/学びに必要な知識/index.html">とっかかり</a></span>
 <span class="section"><a href="/とっかかり/学びに必要な知識/index.html">学びに必要な知識</a></span>
-<span class="page"><a href="/とっかかり/学びに必要な知識/index.html">index</a></span>
-<span class="page selected"><a href="/とっかかり/学びに必要な知識/確認.html">確認</a></span>
 <span class="chapter"><a href="/型/primitive型/型とは.html">型</a></span>
 <span class="section"><a href="/型/primitive型/型とは.html">primitive型</a></span>
+<span class="page"><a href="/型/primitive型/型とは.html">型とは</a></span>
+<span class="page"><a href="/型/primitive型/数値型.html">数値型</a></span>
+<span class="page selected"><a href="/型/primitive型/シーケンス.html">シーケンス</a></span>
 </div>
     <div id="main">
         <div id="top">
@@ -62,49 +63,34 @@
             <h3 class="right">last update: 07/22/2022</h3>
         </div>
         <div id="content">
-            <p>import re
-import sys
-from io import StringIO
-from typing import Any</p>
-<p>class Capturing(list):
-    def <strong>enter</strong>(self):
-        self._stdout = sys.stdout
-        sys.stdout = self._stringio = StringIO()
-        return self</p>
-<pre class="codehilite"><code>def __exit__(self, *args):
-    self.extend(self._stringio.getvalue().splitlines())
-    del self._stringio  # free up some memory
-    sys.stdout = self._stdout
+            <div class="toc">
+<ul>
+<li><a href="#_1">シーケンス</a><ul>
+<li><a href="#list">list</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">シーケンス</h2>
+<p>そもそもシーケンスとはどういう意味でしょうか？シーケンスとは、「連続してひと続きになっているもの・順番・順序」という英単語(sequence)です。<br />
+つまり</p>
+<ul>
+<li>1つ以上のデータを1まとめにして</li>
+<li>ある要素の次は～といった情報をもつもの</li>
+</ul>
+<p>をシーケンスと呼べそうですね。</p>
+<p>Pythonでシーケンスと呼ばれるものは、複数のデータを位置や順序を保って保管する容器のようなものです。</p>
+<h3 id="list">list</h3>
+<p>listとは、英語で「配列」を意味する単語です。
+配列というとエンジニア以外にはあまり聞きなじみがないかもしれませんので、そのまま「リスト」と言った方が良いかもしれませんね。"欲しいものリスト"のリストです。  </p>
+<p>Pythonにおいては、ある意味を持った情報の集まり<code>list</code>を使ってデータひとまとめにします。</p>
+<pre class="codehilite"><code class="language-python">[1, 2, 3, 4, 5]
 </code></pre>
 
-<p>class Test:
-    def <strong>init</strong>(self, name: str, code: str,
-                 error_should_raise: list[Exception],
-                 should_print: list[str]):
-        self.name = name
-        self.code = code
-        self.error_should_raise = error_should_raise
-        self.should_print: list[re.Pattern] = [re.compile(p) for p in should_print]</p>
-<pre class="codehilite"><code>def check_print(self, print_lines: list[str]):
-    return any(p.match(l) for p in self.should_print for l in print_lines)
-
-def run(self,
-        test_globals: dict[str, Any],
-        test_locals: dict[str, Any]):
-    with Capturing() as output:
-        try:
-            exec(self.code, test_globals, test_locals)
-            return self.check_print(output)
-        except self.error_should_raise:
-            return self.check_print(output)
-        except:
-            return False
+<p>このように、角かっこ(あるいは大括弧/bracket)<code>[]</code>で囲み、カンマ<code>,</code>区切りでデータを記述します。</p>
+<p>1つのlistにどんな型の値でも入れることができ、listの中にlistを入れることもできます。</p>
+<pre class="codehilite"><code class="language-python">[1, 2.0, 3 + 4j, [5, [6]]]
 </code></pre>
-
-<h1 id="test">test</h1>
-<p>tests = [
-    Test
-]</p>
         </div>
     </div>
 </div>

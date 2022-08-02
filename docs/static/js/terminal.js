@@ -4,7 +4,7 @@
 // https://www.youtube.com/watch?v=-SggWFS15Do
 // こちらのコードを参考にしています
 window.onload = () => {
-    const python = new Worker('/python/static/js/python_worker.js');
+    const python = new Worker('/static/js/python_worker.js');
     let buffer = new SharedArrayBuffer(1024 * 1024);  // 1MB of shared memory
     let bufferInt = new Int32Array(buffer);
     bufferInt[0] = -1;
