@@ -3,6 +3,7 @@ import os
 import shutil
 import pathlib
 import sass
+import urllib.parse
 
 import markdown
 
@@ -10,6 +11,7 @@ with open('templates/template.html', 'r', encoding='utf-8') as f:
     template = f.read()
 
 publish = pathlib.Path('docs')
+domain = 'python.nagata.pro'
 
 
 class Page:
@@ -18,6 +20,11 @@ class Page:
         filename = path.split('/')[-1]
         self.title = filename.split('.')[1]
         self.data = self.read_md()
+        self.lastmod = datetime.datetime.now()
+
+    @property
+    def safe_title(self):
+        return urllib.parse.quote(self.title)
 
     def read_md(self) -> str:
         with open(self.path, 'r', encoding='utf-8') as f:
@@ -25,10 +32,8 @@ class Page:
         return markdown.Markdown(extensions=['extra', 'codehilite', 'meta', 'toc']).convert(data)
 
     def convert_html(self, navigate: str) -> str:
-        template_with_timestamp = template.replace('{{update}}',
-                                                   datetime.datetime.fromtimestamp(
-                                                       pathlib.Path(self.path).stat().st_mtime)
-                                                   .strftime('%m/%d/%Y'))
+        self.lastmod = datetime.datetime.fromtimestamp(pathlib.Path(self.path).stat().st_mtime)
+        template_with_timestamp = template.replace('{{update}}', self.lastmod.strftime('%m/%d/%Y'))
         data = template_with_timestamp.replace('{{content}}', self.data)
         data = self.specify_language(data)
         data = self.place_navigate(data, navigate)
@@ -55,6 +60,10 @@ class Section:
         self.pages: list[Page] = []
 
     @property
+    def safe_name(self):
+        return urllib.parse.quote(self.name)
+
+    @property
     def first_path(self) -> str:
         return f'{self.name}/{self.pages[0].title}.html'
 
@@ -65,6 +74,10 @@ class Chapter:
         filename = path.split('/')[-1]
         self.name = filename.split('.')[1]
         self.sections: list[Section] = []
+
+    @property
+    def safe_name(self):
+        return urllib.parse.quote(self.name)
 
     @property
     def first_path(self) -> str:
@@ -111,6 +124,27 @@ def create_navigate(chapters: list[Chapter], current: Page) -> str:
     return navigate
 
 
+def create_sitemap(chapters: list[Chapter], path: str):
+    sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+               '{}\n'
+               '</urlset>')
+    url_elem_template = ('  <url>\n'
+                         '    <loc>{url}</loc>\n'
+                         '    <lastmod>{lastmod}</lastmod>\n'
+                         '  </url>')
+    url_template = 'https://{domain}/{url}'
+    url_elems = []
+    for c in chapters:
+        for s in c.sections:
+            for p in s.pages:
+                url = url_template.format(domain=domain, url=f"{c.safe_name}/{s.safe_name}/{p.safe_title}.html")
+                url_elems.append(url_elem_template.format(url=url, lastmod=p.lastmod.strftime('%Y-%m-%d')))
+    xml = sitemap.format('\n'.join(url_elems))
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(xml)
+
+
 def compile_scss():
     sass.compile(dirname=('static/scss', 'static/css'), output_style='compressed')
 
@@ -118,13 +152,14 @@ def compile_scss():
 def copy_static():
     shutil.copytree('static/css', publish / 'static/css')
     shutil.copytree('static/js', publish / 'static/js')
-    shutil.copy('coi-serviceworker.js', publish / 'coi-serviceworker.js')
+    shutil.copytree('root', publish, dirs_exist_ok=True)
 
 
 if __name__ == '__main__':
-    if os.path.exists('python'):
-        shutil.rmtree('python')
+    if os.path.exists(publish):
+        shutil.rmtree(publish)
     tree = get_tree()
     generate(tree, tree)
     compile_scss()
+    create_sitemap(tree, 'root/sitemap.xml')
     copy_static()
