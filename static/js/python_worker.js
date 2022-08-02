@@ -3,6 +3,8 @@ let pyodide;
 
 const ps1 = ">>> ",
     ps2 = "... ";
+let currentPrompt = ps1;
+
 let stdinbuffer = null
 const stdin = () => {
     // Send message to activate stdin mode
@@ -12,6 +14,9 @@ const stdin = () => {
     })
     postMessage({
         type: 'input',
+    })
+    postMessage({
+        type: 'ready'
     })
     let text = ''
     Atomics.wait(stdinbuffer, 0, -1)
@@ -102,7 +107,11 @@ class Python {
     async exec(command) {
         for (const c of command.split("\n")) {
             let fut = this.namespace.pyconsole.push(c);
-            postMessage({type: 'prompt', prompt: fut.syntax_check === "incomplete" ? ps2 : ps1})
+            if (currentPrompt !== (fut.syntax_check === "incomplete" ? ps2 : ps1)) {
+                currentPrompt = fut.syntax_check === "incomplete" ? ps2 : ps1
+                postMessage({type: 'prompt', prompt: currentPrompt})
+            }
+
             switch (fut.syntax_check) {
                 case "syntax-error":
                     postMessage({type: 'error', error: fut.formatted_error.trimEnd()})

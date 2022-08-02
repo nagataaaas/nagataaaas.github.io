@@ -14,6 +14,7 @@ window.onload = () => {
     let inputBlocked = false;
     let completion_callback = null;
     let unlock;
+    const mutex = new MutexPromise('interpreter');
 
     class Terminal {
         constructor() {
@@ -35,6 +36,15 @@ window.onload = () => {
         }
     }
 
+    const release = () => {
+        if (unlock) {
+            mutex.unlock();
+            unlock();
+            unlock = null;
+        }
+        term.resume();
+    }
+
     python.onmessage = (e) => {
         switch (e.data.type) {
             case 'prompt':
@@ -51,6 +61,7 @@ window.onload = () => {
                 break
             case 'ready':
                 ready = true;
+                release();
                 break;
             case 'completion':
                 if (completion_callback) completion_callback(e.data.completion);
@@ -58,10 +69,7 @@ window.onload = () => {
             case 'input':
                 if (inputBlocked) return;
                 inputBlocked = true;
-        }
-        if (unlock) {
-            unlock();
-            unlock = null;
+                release();
         }
 
     }
@@ -92,22 +100,22 @@ window.onload = () => {
         let resolve;
         const _ready = term.ready;
         term.ready = new Promise((res) => (resolve = res));
-        await _ready;
-        return resolve;
+        await _ready
+        return resolve
     }
 
 
     async function interpreter(command) {
-        unlock = await lock();
+        mutex.lock();
         term.pause();
+        unlock = await lock();
         if (inputBlocked) {
             handleInput(command);
             inputBlocked = false;
         } else {
             python.postMessage({'type': 'exec', 'command': command});
         }
-        term.resume();
-        await sleep(30);
+        await sleep(1000);
     }
 
     const handleInput = (command) => {
