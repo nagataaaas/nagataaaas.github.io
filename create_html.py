@@ -70,7 +70,7 @@ class Chapter:
 
 
 def generate(chapters: list[Chapter], tree: list[Chapter]):
-    publish = pathlib.Path('publish')
+    publish = pathlib.Path('python')
     publish.mkdir(exist_ok=True)
     chapters[0].sections[0].pages[0].save_html(publish / 'index.html',
                                                create_navigate(tree, tree[0].sections[0].pages[0]))
@@ -115,13 +115,13 @@ def compile_scss():
 
 
 def copy_static():
-    shutil.copytree('static/css', 'publish/static/css')
-    shutil.copytree('static/js', 'publish/static/js')
+    shutil.copytree('static/css', 'python/static/css')
+    shutil.copytree('static/js', 'python/static/js')
 
 
 if __name__ == '__main__':
-    if os.path.exists('publish'):
-        shutil.rmtree('publish')
+    if os.path.exists('python'):
+        shutil.rmtree('python')
     tree = get_tree()
     generate(tree, tree)
     compile_scss()
