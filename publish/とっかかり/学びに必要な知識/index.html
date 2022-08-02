@@ -80,8 +80,8 @@
 <h3 id="_2">エラー</h3>
 <p>エラーとは、予期しない状態になった場合に発生するものです。プログラム君に怒られていると思ってください。<br />
 例えば、以下のコードはエラーを引き起こします(なぜエラーになるかは(型)[/型]の章でお話します)</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">1 / 0
+</code></pre>
 
 <p>実行した方は<code>ZeroDivisionError: division by zero</code>といった文字が見えたかもしれません。これがエラーです！人生初エラーですね！
 これからのプログラマー人生で数えきれないエラーを引き起こすことになるので、今のうちに覚悟しておきましょう。</p>
@@ -98,15 +98,15 @@
 <h3 id="_3">コメントアウト</h3>
 <p>コメントアウトとは「プログラムに実行してほしくないけれど、後で見る人のために情報を残しておきたいときのためにコメントを残しておく」ことです。<br />
 Pythonでは、<code>#</code>以降の文字列をコメントアウトします。</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="mi">42</span>
-<span class="c1"># 知ってましたか？これが「生命、宇宙、そして万物についての究極の疑問の答え」です</span>
-<span class="c1"># こんな感じで `#` を使うと、それ以降を無視してくれます。</span>
- <span class="c1"># 1 / 0</span>
+<pre class="codehilite"><code class="language-python">42
+# 知ってましたか？これが「生命、宇宙、そして万物についての究極の疑問の答え」です
+# こんな感じで `#` を使うと、それ以降を無視してくれます。
+ # 1 / 0
 
-<span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
-<span class="c1"># もし外してしまうと、こんな感じでエラーになります。</span>
-<span class="c1"># 実行してみてね！</span>
-</code></pre></div>
+1 / 0
+# もし外してしまうと、こんな感じでエラーになります。
+# 実行してみてね！
+</code></pre>
 
 <p>コメントアウトは主に
 - 複雑な処理に説明を付ける
@@ -117,12 +117,12 @@ Pythonでは、<code>#</code>以降の文字列をコメントアウトします
 <h3 id="_4">変数</h3>
 <p>さっそく耳慣れない言葉が飛び出してきましたね。変数(variable)とは、あるデータを入れておく箱のことです。<br />
 ある情報をどこかに保存しておきたいときに、それを後から使うことができます。</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="n">use_later</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># この数字は後で使う</span>
+<pre class="codehilite"><code class="language-python">use_later = 5  # この数字は後で使う
 
-<span class="n">use_later</span>  <span class="c1"># これを 5 として使える</span>
+use_later  # これを 5 として使える
 
-<span class="n">use_later</span> <span class="o">+</span> <span class="mi">4</span>  <span class="c1"># 5+4 と同じなので、答えは9になる</span>
-</code></pre></div>
+use_later + 4  # 5+4 と同じなので、答えは9になる
+</code></pre>
 
 <p>変数にデータを入れることを 代入(substitution) といいます。<br />
 Pythonでは(というか、ほとんどのプログラミング言語でもそうですが)代入は<code>変数名 = 値</code>という書き方です。
@@ -133,16 +133,16 @@ Pythonでは(というか、ほとんどのプログラミング言語でもそ�
 <li>2文字目以降は英字に加えて数字<code>0,1,2,...,8,9</code>, アンダースコア<code>_</code>も使えます</li>
 </ol>
 <p>つまり、以下のような感じですね</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="c1"># good</span>
-<span class="n">data</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">data_2</span> <span class="o">=</span> <span class="n">data</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="n">data_to_use</span> <span class="o">=</span> <span class="n">data_2</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">data_to_use</span> <span class="o">+</span> <span class="mi">1</span>
+<pre class="codehilite"><code class="language-python"># good
+data = 1
+data_2 = data + 1
+data_to_use = data_2 + 1
+d = data_to_use + 1
 
-<span class="c1"># bad</span>
-<span class="mi">2</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># 整数から始めることはできません！</span>
-<span class="mi">3</span> <span class="o">=</span> <span class="n">data</span> <span class="o">+</span> <span class="mi">1</span>      <span class="c1"># 整数に整数を代入することはできません！</span>
-</code></pre></div>
+# bad
+2data = data + 1  # 整数から始めることはできません！
+3 = data + 1      # 整数に整数を代入することはできません！
+</code></pre>
 
 <p>正規表現で述べるところの <code>[a-z][a-z0-9_]*</code> という感じです。正規表現は別の章で述べるので今わからなくても問題ありません！！</p>
 <blockquote>

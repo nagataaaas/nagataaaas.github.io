@@ -78,25 +78,25 @@
 <p>'integer'(整数)の略でintとなっています。
 あなたのキーボードの上の方(あるいはスマホなら...どこでしょう？)についている数字がそれです！その10個のキートップを自由自在に押すことで、あなたはint型の使い手初心者になれます。</p>
 <p>以下のものはすべて有効なint型のデータです</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="mi">1</span>
-<span class="mi">42</span>
-<span class="mi">763</span>
-<span class="mi">315</span>
-<span class="o">+</span><span class="mi">100</span>  <span class="c1"># これは数字だけの表現ではありませんね笑</span>
-<span class="o">-</span><span class="mi">100</span>
-<span class="mi">99999999999999999999999999</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">1
+42
+763
+315
++100  # これは数字だけの表現ではありませんね笑
+-100
+99999999999999999999999999
+</code></pre>
 
 <p>ただし、以下のものは正しくありません</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="mi">01</span>
-<span class="c1"># 0から始めることはできません</span>
+<pre class="codehilite"><code class="language-python">01
+# 0から始めることはできません
 
-<span class="mi">40</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span>
-<span class="c1"># 残念ですが、見やすさのためにカンマを挿入することはできません</span>
-<span class="c1"># カンマを用いると、全く別の型と認識されます</span>
-<span class="c1"># かわりにアンダースコア(_)を使ってください</span>
-<span class="c1"># 正) 40_500_500</span>
-</code></pre></div>
+40, 500, 500
+# 残念ですが、見やすさのためにカンマを挿入することはできません
+# カンマを用いると、全く別の型と認識されます
+# かわりにアンダースコア(_)を使ってください
+# 正) 40_500_500
+</code></pre>
 
 <p>私たちが日頃計算を行うように、Pythonでも整数同士の計算をすることができます</p>
 <table>
@@ -149,49 +149,49 @@
 <code>**</code> &gt; ( <code>*</code>, <code>/</code>, <code>//</code>, <code>%</code> ) &gt; ( <code>+</code>, <code>-</code> )<br />
 となっており、同じ優先順位の間では左のものを優先します。</p>
 <p>以下のコードと、その実行結果をその真下に記入しています。</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="c1"># 2</span>
+<pre class="codehilite"><code class="language-python">1 + 1
+# 2
 
-<span class="mi">23</span> <span class="o">-</span> <span class="mi">123</span>
-<span class="c1"># -100</span>
+23 - 123
+# -100
 
-<span class="mi">3</span> <span class="o">**</span> <span class="mi">3</span>
-<span class="c1"># 27</span>
+3 ** 3
+# 27
 
-<span class="mi">3</span> <span class="o">**</span> <span class="mi">0</span>
-<span class="c1"># 1</span>
+3 ** 0
+# 1
 
-<span class="mi">120</span> <span class="o">*</span> <span class="mi">15</span>
-<span class="c1"># 1800</span>
+120 * 15
+# 1800
 
-<span class="mi">15</span> <span class="o">/</span> <span class="mi">3</span>
-<span class="c1"># 5.0</span>
+15 / 3
+# 5.0
 
-<span class="mi">365</span> <span class="o">/</span> <span class="mi">7</span>
-<span class="c1"># 52.142857142857146</span>
+365 / 7
+# 52.142857142857146
 
-<span class="mi">365</span> <span class="o">//</span> <span class="mi">7</span>
-<span class="c1"># 52</span>
+365 // 7
+# 52
 
-<span class="mi">365</span> <span class="o">%</span> <span class="mi">7</span>
-<span class="c1"># 1</span>
+365 % 7
+# 1
 
-<span class="p">(</span><span class="mi">42</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">32</span> <span class="o">-</span> <span class="mi">4</span><span class="p">)</span>
-<span class="c1"># 1232</span>
-</code></pre></div>
+(42 + 2) * (32 - 4)
+# 1232
+</code></pre>
 
 <p><code>15 / 3</code>と<code>365 / 7</code>の答えが小数になりましたね！これについては<em>float</em>で述べますので、しばしお待ちください...</p>
 <p>さて、こういった計算の中にもやってはいけないことがあります。それは、ゼロで数字を割ること(ゼロ除算)です。</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="mi">500</span> <span class="o">/</span> <span class="mi">0</span>
-<span class="c1"># ZeroDivisionError: division by zero</span>
+<pre class="codehilite"><code class="language-python">500 / 0
+# ZeroDivisionError: division by zero
 
-<span class="mi">0</span> <span class="o">//</span> <span class="mi">0</span>
-<span class="c1"># ZeroDivisionError: division by zero</span>
-<span class="c1"># 0 を 0 で割るのもダメです</span>
+0 // 0
+# ZeroDivisionError: division by zero
+# 0 を 0 で割るのもダメです
 
-<span class="mi">500</span> <span class="o">%</span> <span class="mi">0</span>
-<span class="c1"># ZeroDivisionError: integer division or modulo by zero</span>
-</code></pre></div>
+500 % 0
+# ZeroDivisionError: integer division or modulo by zero
+</code></pre>
 
 <p>こういった、実行してみないとわからないダメなことというのもままありますので、気を付けてください。</p>
 <blockquote>
@@ -208,41 +208,41 @@
 <p>'floating point number'(浮動小数点数)の略でfloatとなっています。
 浮動小数点数... なかなかややこしい響きですが「点がふわふわと動く数値」ですから、これはつまり、小数を持つ数字の「点」に着目してつけられた名前ですね。</p>
 <p>以下のものはすべて有効なfloat型のデータです</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="mf">1.0</span>
-<span class="mf">1.1</span>
-<span class="mf">1.0000000000001</span>
-<span class="o">-</span><span class="mf">300.0</span>
-<span class="mf">1.41421356</span>
+<pre class="codehilite"><code class="language-python">1.0
+1.1
+1.0000000000001
+-300.0
+1.41421356
 
-<span class="mf">512.</span>
-<span class="c1"># 512.0 と同じ</span>
+512.
+# 512.0 と同じ
 
-<span class="o">.</span><span class="mi">512</span>
-<span class="c1"># 0.512</span>
+.512
+# 0.512
 
-<span class="o">-.</span><span class="mi">512</span>
-<span class="c1"># -0.512</span>
+-.512
+# -0.512
 
-<span class="mf">3e2</span>
-<span class="c1"># 3 * (10 ** 2) = 300.0</span>
+3e2
+# 3 * (10 ** 2) = 300.0
 
-<span class="mf">3e-2</span>
-<span class="c1"># 3 * (10 ** -2) = 0.03</span>
+3e-2
+# 3 * (10 ** -2) = 0.03
 
-<span class="mf">001.001</span>
-<span class="c1"># intと違い、先頭に0を持ってくることが出来ます</span>
-</code></pre></div>
+001.001
+# intと違い、先頭に0を持ってくることが出来ます
+</code></pre>
 
 <p>ただし、以下のものは正しくありません</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="o">.</span>
-<span class="c1"># 0.0 を表現するために整数部と小数部両方は省略できません</span>
-<span class="c1"># 正) 0.0, 0., .0</span>
+<pre class="codehilite"><code class="language-python">.
+# 0.0 を表現するために整数部と小数部両方は省略できません
+# 正) 0.0, 0., .0
 
-<span class="mf">5e2</span>
-<span class="o">.</span><span class="mi">3</span>
-<span class="c1"># 指数表記の際に小数を用いることはできません</span>
-<span class="c1"># 正) 5 * (10 ** 2.3)</span>
-</code></pre></div>
+5e2
+.3
+# 指数表記の際に小数を用いることはできません
+# 正) 5 * (10 ** 2.3)
+</code></pre>
 
 <p>intと同様に、四則計算などを行うことができます</p>
 <table>
@@ -293,44 +293,44 @@
 </table>
 <p><code>1.2 - 0.2</code>のように答えが整数になる場合であっても、元の式のどちらか一方がfloatの時は答えもfloatになることに注意してください。</p>
 <p>優先順位はintの時と同様です。</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="mf">1.0</span> <span class="o">+</span> <span class="mf">1.0</span>
-<span class="c1"># 2.0</span>
+<pre class="codehilite"><code class="language-python">1.0 + 1.0
+# 2.0
 
-<span class="mf">23.502</span> <span class="o">-</span> <span class="mf">123.500</span>
-<span class="c1"># -99.998</span>
+23.502 - 123.500
+# -99.998
 
-<span class="mf">3.229</span> <span class="o">**</span> <span class="mi">3</span>
-<span class="c1"># 33.666977989</span>
+3.229 ** 3
+# 33.666977989
 
-<span class="mi">3</span> <span class="o">**</span> <span class="mf">0.</span>
-<span class="c1"># 1.0</span>
+3 ** 0.
+# 1.0
 
-<span class="mf">920.2</span> <span class="o">*</span> <span class="mi">15</span>
-<span class="c1"># 13803.0</span>
+920.2 * 15
+# 13803.0
 
-<span class="mf">15.3</span> <span class="o">/</span> <span class="mi">3</span>
-<span class="c1"># 5.1000000000000005</span>
-<span class="c1"># コンピュータでは、小さな値を表現しようとすると誤差が生じることがあります。</span>
-<span class="c1"># こういった誤差を生じさせない形で計算を行うには、*decimal*や*fractions*といった機能を用いる必要があります。</span>
-<span class="c1"># TODO: ライブラリに関する記述</span>
+15.3 / 3
+# 5.1000000000000005
+# コンピュータでは、小さな値を表現しようとすると誤差が生じることがあります。
+# こういった誤差を生じさせない形で計算を行うには、*decimal*や*fractions*といった機能を用いる必要があります。
+# TODO: ライブラリに関する記述
 
-<span class="mf">365.25</span> <span class="o">/</span> <span class="mi">7</span>
-<span class="c1"># 52.17857142857143</span>
+365.25 / 7
+# 52.17857142857143
 
-<span class="mf">365.0</span> <span class="o">//</span> <span class="mi">7</span>
-<span class="c1"># 52.0</span>
+365.0 // 7
+# 52.0
 
-<span class="mi">365</span> <span class="o">%</span> <span class="mf">7.0</span>
-<span class="c1"># 1.0</span>
+365 % 7.0
+# 1.0
 
-<span class="p">(</span><span class="mf">42.54</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">32</span> <span class="o">-</span> <span class="mf">4.2</span><span class="p">)</span>
-<span class="c1"># 1238.212</span>
-</code></pre></div>
+(42.54 + 2) * (32 - 4.2)
+# 1238.212
+</code></pre>
 
 <p>intのように、 0と等しい値で除算することはできません</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="mf">0.0</span> <span class="o">/</span> <span class="mf">0.0</span>
-<span class="c1"># ZeroDivisionError: float division by zero</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">0.0 / 0.0
+# ZeroDivisionError: float division by zero
+</code></pre>
 
 <h3 id="complex">complex</h3>
 <p>'complex number'(複素数)の略でcomplexとなっています。つまり、虚数に関する数値ですね。<br />
@@ -346,24 +346,24 @@
 </ul>
 <p>というルールがあります。</p>
 <p>以下のものはすべて有効なcomplex型のデータです</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="mi">1</span><span class="n">j</span>
-<span class="o">.</span><span class="mi">0</span><span class="n">j</span>
-<span class="mf">1.1</span><span class="n">j</span>
-<span class="mi">5</span> <span class="o">+</span> <span class="mi">3</span><span class="n">j</span>
-<span class="mf">3.4</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span>
-<span class="mi">1</span> <span class="o">+</span> <span class="mi">0</span><span class="n">j</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-python">1j
+.0j
+1.1j
+5 + 3j
+3.4 + 1j
+1 + 0j
+</code></pre>
 
 <p>ただし、以下のものは正しくありません</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="o">.</span><span class="n">j</span>
-<span class="c1"># 0.0jのために、0を両方省略することはできません</span>
-<span class="c1"># なお、 0.0jと入力した場合でも、0jと解釈されます</span>
-<span class="c1"># 正) 0.0j, 0j</span>
+<pre class="codehilite"><code class="language-python">.j
+# 0.0jのために、0を両方省略することはできません
+# なお、 0.0jと入力した場合でも、0jと解釈されます
+# 正) 0.0j, 0j
 
-<span class="n">j</span>
-<span class="c1"># 1jの1を省略することはできません</span>
-<span class="c1"># 正) 1j</span>
-</code></pre></div>
+j
+# 1jの1を省略することはできません
+# 正) 1j
+</code></pre>
 
 <p>一部の四則計算などを行うことができます</p>
 <table>
@@ -403,14 +403,14 @@
 </tbody>
 </table>
 <p>計算に用いるどちらか一方でもcomplex型である場合、<code>//</code>と<code>%</code>を用いることは出来ないので注意してください。</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span><span class="n">j</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-<span class="mi">3</span><span class="n">j</span> <span class="o">//</span> <span class="mi">3</span><span class="n">j</span>
-<span class="c1"># TypeError: can&#39;t take floor of complex number.</span>
+<pre class="codehilite"><code class="language-python">(1 + 3j) // 2
+3j // 3j
+# TypeError: can't take floor of complex number.
 
-<span class="mi">5</span><span class="n">j</span> <span class="o">%</span> <span class="mi">2</span><span class="n">j</span>
-<span class="mi">5</span><span class="n">j</span> <span class="o">%</span> <span class="mi">2</span>
-<span class="c1"># TypeError: can&#39;t mod complex numbers.</span>
-</code></pre></div>
+5j % 2j
+5j % 2
+# TypeError: can't mod complex numbers.
+</code></pre>
         </div>
     </div>
 </div>

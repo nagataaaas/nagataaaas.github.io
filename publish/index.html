@@ -89,17 +89,17 @@ Pythonを深く理解するためには、こういった知識が必要にな�
 </blockquote>
 <p>という風に表記します。<br />
 ある程度長いプログラムであったり、読者の方に実行をしていただきたいコードの場合</p>
-<div class="codehilite"><pre class="language-python"><span></span><code><span class="kn">import</span> <span class="nn">math</span>
+<pre class="codehilite"><code class="language-python">import math
 
-<span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">number</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">number</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">return</span> <span class="kc">True</span>
+def is_prime(number):
+    for i in range(2, math.ceil(math.sqrt(number))+1):
+        if number % i == 0:
+            return False
+    return True
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;19139 is&#39;</span><span class="p">,</span> <span class="s1">&#39;prime&#39;</span> <span class="k">if</span> <span class="n">is_prime</span><span class="p">(</span><span class="mi">19139</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;not prime&#39;</span><span class="p">)</span>
-<span class="c1"># 19139 is prime</span>
-</code></pre></div>
+print('19139 is', 'prime' if is_prime(19139) else 'not prime')
+# 19139 is prime
+</code></pre>
 
 <p>のように表記します。コードの右上の<code>RUN</code>を押下することで、webページ上でコードを実行することができます。その実行後のポップアップでは続けてあなたが自由に実行することができるので、ちょっとしたコードを試したいときに押してみるのも良いですね。<br />
 現在は今書いたようなコードの内容は全くわからなくても大丈夫です。</p>
