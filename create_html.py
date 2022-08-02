@@ -117,7 +117,6 @@ def compile_scss():
 def copy_static():
     shutil.copytree('static/css', 'publish/static/css')
     shutil.copytree('static/js', 'publish/static/js')
-    shutil.copytree('static/cdn', 'publish/static/cdn')
 
 
 if __name__ == '__main__':
