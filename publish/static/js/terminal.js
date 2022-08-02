@@ -69,7 +69,6 @@ window.onload = () => {
     const terminal = new Terminal();
 
     $(document).on('click', 'button.run-button', async function (e) {
-        console.log("run button clicked");
         while (!ready) {
             await sleep(100);
         }
@@ -101,7 +100,6 @@ window.onload = () => {
     async function interpreter(command) {
         unlock = await lock();
         term.pause();
-        console.debug(inputBlocked, command)
         if (inputBlocked) {
             handleInput(command);
             inputBlocked = false;
