@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ながた の やるだけPython</title>
+    <script src="coi-serviceworker.js"></script>
+
+    <!--syntax highlight-->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+
+    <!--jquery-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/static/css/jquery-ui.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery.terminal@2.23.0/js/jquery.terminal.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/jquery.terminal@2.23.0/css/jquery.terminal.min.css" rel="stylesheet">
+
+
+    <!--pyodide-->
+    <script src="/static/js/terminal.js"></script>
+
+    <!--style-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/dracula.css">
+    <link rel="stylesheet" href="/static/css/terminal.css">
+
+    <!--style-->
+    <script src="/static/js/navigate.js"></script>
+
+</head>
+<body>
+<div id="terminal-container">
+    <div id="terminal-window" class="hidden">
+
+        <div class="header">
+            <span> 🐍 Python Interpreter</span>
+            <button onclick="closeConsole()"><span class="close-btn">&#8211;</span></button>
+        </div>
+        <div id="terminal"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="navigate"> <span class="chapter"><a href="/はじめに/目的と流れ/index.html">はじめに</a></span>
+<span class="section"><a href="/はじめに/目的と流れ/index.html">目的と流れ</a></span>
+<span class="chapter"><a href="/とっかかり/学びに必要な知識/index.html">とっかかり</a></span>
+<span class="section"><a href="/とっかかり/学びに必要な知識/index.html">学びに必要な知識</a></span>
+<span class="page selected"><a href="/とっかかり/学びに必要な知識/index.html">index</a></span>
+<span class="page"><a href="/とっかかり/学びに必要な知識/確認.html">確認</a></span>
+<span class="chapter"><a href="/型/primitive型/型とは.html">型</a></span>
+<span class="section"><a href="/型/primitive型/型とは.html">primitive型</a></span>
+</div>
+    <div id="main">
+        <div id="top">
+            <h1 id="title">やるだけPython</h1>
+            <h3 id="author" class="right">Yamato Nagata</h3>
+            <h3 id="email" class="right"><a href="mailto:nagata@mail.nagata.pro">nagata@mail.nagata.pro</a>
+            </h3>
+            <h3 class="right">last update: 07/25/2022</h3>
+        </div>
+        <div id="content">
+            <div class="toc">
+<ul>
+<li><a href="#_1">勉強のための勉強</a><ul>
+<li><a href="#_2">エラー</a></li>
+<li><a href="#_3">コメントアウト</a></li>
+<li><a href="#_4">変数</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">勉強のための勉強</h2>
+<p>が必要です。<br />
+数学を学ぶ前には鉛筆の削り方を知らなければいけませんし、プログラミングを学ぶ前にはプログラムの試し方・見方を知らなければいけません。</p>
+<p>今回は、以降の勉強のための必須知識をまとめて説明しますね<br />
+今の段階では、いずれも学習に必要な最低限の深さしか説明しませんのでご安心ください。</p>
+<h3 id="_2">エラー</h3>
+<p>エラーとは、予期しない状態になった場合に発生するものです。プログラム君に怒られていると思ってください。<br />
+例えば、以下のコードはエラーを引き起こします(なぜエラーになるかは(型)[/型]の章でお話します)</p>
+<pre class="codehilite"><code class="language-python">1 / 0
+</code></pre>
+
+<p>実行した方は<code>ZeroDivisionError: division by zero</code>といった文字が見えたかもしれません。これがエラーです！人生初エラーですね！
+これからのプログラマー人生で数えきれないエラーを引き起こすことになるので、今のうちに覚悟しておきましょう。</p>
+<blockquote>
+<p>エラーの読み方</p>
+<p>先ほどのエラー <code>ZeroDivisionError: division by zero</code> は日本語にすると
+<code>0除算エラー: 0で割り算をしようとした</code> という意味です。<br />
+つまり、0で割り算をしてはいけない、という情報が分かるわけですね。あるいは、それを知ってても気付かないうちに0で割ってしまっていることに気付けます。<br />
+さらに、コードのどの部分でエラーが発生したかまでご丁寧に書いてくれています。</p>
+<p>時々、エラーの中身を見ずにどうにかしようとする方がいますが、それではいけません！<br />
+プログラム君(厳密にはインタープリタ君と言いますが、それはどこかで話しましょう)が頑張ってエラーの原因を分かりやすく教えようとしてくれているのに、無下にしたらかわいそうです<br />
+冗談はおいても、プログラミング言語を作るときのエラー処理はすごく面倒なのです。言語開発者の苦労を労うためにも、エラーメッセージはちゃんと読みましょう！</p>
+</blockquote>
+<h3 id="_3">コメントアウト</h3>
+<p>コメントアウトとは「プログラムに実行してほしくないけれど、後で見る人のために情報を残しておきたいときのためにコメントを残しておく」ことです。<br />
+Pythonでは、<code>#</code>以降の文字列をコメントアウトします。</p>
+<pre class="codehilite"><code class="language-python">42
+# 知ってましたか？これが「生命、宇宙、そして万物についての究極の疑問の答え」です
+# こんな感じで `#` を使うと、それ以降を無視してくれます。
+ # 1 / 0
+
+1 / 0
+# もし外してしまうと、こんな感じでエラーになります。
+# 実行してみてね！
+</code></pre>
+
+<p>コメントアウトは主に
+- 複雑な処理に説明を付ける
+- プログラムのうち、一旦実行させたくないものを削除せずに無効化する
+といった目的のために使います。</p>
+<p>昔書いたコードをもう一度読み込んで意味を理解する時間はもったいないですし、他人にコードを読んでもらう時に意図の説明がなければさっぱり検討がつかないこともあります。<br />
+再利用可能なコードにするために、コメントアウトを適切に使いましょう</p>
+<h3 id="_4">変数</h3>
+<p>さっそく耳慣れない言葉が飛び出してきましたね。変数(variable)とは、あるデータを入れておく箱のことです。<br />
+ある情報をどこかに保存しておきたいときに、それを後から使うことができます。</p>
+<pre class="codehilite"><code class="language-python">use_later = 5  # この数字は後で使う
+
+use_later  # これを 5 として使える
+
+use_later + 4  # 5+4 と同じなので、答えは9になる
+</code></pre>
+
+<p>変数にデータを入れることを 代入(substitution) といいます。<br />
+Pythonでは(というか、ほとんどのプログラミング言語でもそうですが)代入は<code>変数名 = 値</code>という書き方です。
+現実世界では<code>=</code>は「同じ値かどうか」を意味するのでちょっとなれないかもしれないですが、頑張ってください</p>
+<p>変数名には一定のルールがあります。厳密にはいろんな文字列が使えますが、まずは以下のルールを覚えておくとよいでしょう</p>
+<ol>
+<li>1文字目は英字<code>a,b,...,y,z</code>から始めましょう</li>
+<li>2文字目以降は英字に加えて数字<code>0,1,2,...,8,9</code>, アンダースコア<code>_</code>も使えます</li>
+</ol>
+<p>つまり、以下のような感じですね</p>
+<pre class="codehilite"><code class="language-python"># good
+data = 1
+data_2 = data + 1
+data_to_use = data_2 + 1
+d = data_to_use + 1
+
+# bad
+2data = data + 1  # 整数から始めることはできません！
+3 = data + 1      # 整数に整数を代入することはできません！
+</code></pre>
+
+<p>正規表現で述べるところの <code>[a-z][a-z0-9_]*</code> という感じです。正規表現は別の章で述べるので今わからなくても問題ありません！！</p>
+<blockquote>
+<p>正規表現って？</p>
+<p>正規表現(Regular Expression)とは、文字列の集合を表現するための記法です。<br />
+ここで文字列の<em>集合</em>といったのは、1つの正規表現で様々な文字列を表現できることを意味しています。</p>
+<p>たとえば、<code>[a-zA-Z]</code>は英字の<em>集合</em>を表すことができ、 a~z + A~Z の計52文字が含まれています。<br />
+たった8文字の正規表現で52文字表現できるというのはありがたいですね。  </p>
+<p>また、<code>[a-z]+</code>は1文字以上の小文字英単語の集合を表すことができます。<code>cat</code>, <code>python</code>, <code>pocketmonster</code>なんかも含まれています。</p>
+<p>正規表現はプログラム内に便利な形で取り込まれており、これらを用いて検索・置換などができます。<br />
+マスターすれば、より柔軟に文字列操作ができますね！</p>
+</blockquote>
+        </div>
+    </div>
+</div>
+
+
+<!--inject Run button-->
+<script>
+    document.querySelectorAll('pre > code').forEach(e => {
+        const button = document.createElement('button');
+        button.classList.add('run-button');
+        button.innerText = 'RUN';
+        e.parentNode.insertBefore(button, e);
+    })
+</script>
+</body>
+</html>

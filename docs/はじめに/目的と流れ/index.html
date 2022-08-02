@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ながた の やるだけPython</title>
+    <script src="coi-serviceworker.js"></script>
+
+    <!--syntax highlight-->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+
+    <!--jquery-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/static/css/jquery-ui.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery.terminal@2.23.0/js/jquery.terminal.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/jquery.terminal@2.23.0/css/jquery.terminal.min.css" rel="stylesheet">
+
+
+    <!--pyodide-->
+    <script src="/static/js/terminal.js"></script>
+
+    <!--style-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/dracula.css">
+    <link rel="stylesheet" href="/static/css/terminal.css">
+
+    <!--style-->
+    <script src="/static/js/navigate.js"></script>
+
+</head>
+<body>
+<div id="terminal-container">
+    <div id="terminal-window" class="hidden">
+
+        <div class="header">
+            <span> 🐍 Python Interpreter</span>
+            <button onclick="closeConsole()"><span class="close-btn">&#8211;</span></button>
+        </div>
+        <div id="terminal"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="navigate"> <span class="chapter"><a href="/はじめに/目的と流れ/index.html">はじめに</a></span>
+<span class="section"><a href="/はじめに/目的と流れ/index.html">目的と流れ</a></span>
+<span class="page selected"><a href="/はじめに/目的と流れ/index.html">index</a></span>
+<span class="chapter"><a href="/とっかかり/学びに必要な知識/index.html">とっかかり</a></span>
+<span class="section"><a href="/とっかかり/学びに必要な知識/index.html">学びに必要な知識</a></span>
+<span class="chapter"><a href="/型/primitive型/型とは.html">型</a></span>
+<span class="section"><a href="/型/primitive型/型とは.html">primitive型</a></span>
+</div>
+    <div id="main">
+        <div id="top">
+            <h1 id="title">やるだけPython</h1>
+            <h3 id="author" class="right">Yamato Nagata</h3>
+            <h3 id="email" class="right"><a href="mailto:nagata@mail.nagata.pro">nagata@mail.nagata.pro</a>
+            </h3>
+            <h3 class="right">last update: 07/22/2022</h3>
+        </div>
+        <div id="content">
+            <div class="toc">
+<ul>
+<li><a href="#_1">このページの目的</a></li>
+<li><a href="#_2">本サイトの流れ</a></li>
+</ul>
+</div>
+<h1 id="_1">このページの目的</h1>
+<p>このページは、主に初めてPythonに触れるプログラミング初心者の方を対象に、
+不自由なくPythonを使えるようになることを目的にしています。</p>
+<p>不自由なくというとその道のりは長いように聞こえるかもしれませんが、実際のところ、それは人によります。
+メモリやポインタの概念をうっすらとでも理解していればゴールはぐっと近づきますし、
+逆に今まで全くコンピュータに触れたことがないという方であれば大変かもしれません。<br />
+Pythonを深く理解するためには、こういった知識が必要になってくる部分がある(とくにlistに顕著)と私は思います。</p>
+<p>初心者の方がなんとなくでPythonを理解したつもりになって次のセクションに進みそこでつまづくという光景を何度となく見てきましたので、
+そういったことが無いよう、できるだけ寄り添ってPythonに馴染んでいただくために
+時に1段低レイヤー(ハードウェアに近いことを低レイヤーといいます)寄りの話題に触れることもあるかと思いますが、
+「ふーん、そうなんだ」程度でかまいませんので、お付き合いいただきたいと思います(とはいっても、C言語の表面を撫でる程度です)。</p>
+<p>では前置きもほどほどにして、内容へと移っていきましょう</p>
+<h1 id="_2">本サイトの流れ</h1>
+<p>基本的には目次通りに進んでいただくことをお勧めします。
+ページでは、それ以前に述べた内容はすでに学んだ前提で進みますので、途中から読む場合は適宜遡っていただく必要が出るかもしれません。
+ある程度複雑な内容に再度触れる場合はそれについて解説した項目へのリンクをつけるようにします。</p>
+<p>また、プログラムを扱うという性質上、コードの一部分に触れるような言及方法の際は</p>
+<blockquote>
+<p>さて、この変数<code>x</code>は現在<code>3</code>という<code>int</code>になっています。</p>
+</blockquote>
+<p>という風に表記します。<br />
+ある程度長いプログラムであったり、読者の方に実行をしていただきたいコードの場合</p>
+<pre class="codehilite"><code class="language-python">import math
+
+def is_prime(number):
+    for i in range(2, math.ceil(math.sqrt(number))+1):
+        if number % i == 0:
+            return False
+    return True
+
+print('19139 is', 'prime' if is_prime(19139) else 'not prime')
+# 19139 is prime
+</code></pre>
+
+<p>のように表記します。コードの右上の<code>RUN</code>を押下することで、webページ上でコードを実行することができます。その実行後のポップアップでは続けてあなたが自由に実行することができるので、ちょっとしたコードを試したいときに押してみるのも良いですね。<br />
+現在は今書いたようなコードの内容は全くわからなくても大丈夫です。</p>
+<p>章の終わりには読者の皆さんが理解できているか自分自身でチェックするための問題ページを用意しています。<br />
+そのページでは、コードを編集して実行することができるようになっていますので、ぜひいろいろ試してみてください。</p>
+<p>また、一部ページ内で</p>
+<blockquote>
+<p>TODO: ◯◯に関する記述</p>
+</blockquote>
+<p>のような文言が登場しますが、これは筆者が自分のためにつけた、今後記述すべき内容に関するメモ書きです。気にしていただかなくても構いません。</p>
+<p>それでは早速次の章へまいりましょう。</p>
+        </div>
+    </div>
+</div>
+
+
+<!--inject Run button-->
+<script>
+    document.querySelectorAll('pre > code').forEach(e => {
+        const button = document.createElement('button');
+        button.classList.add('run-button');
+        button.innerText = 'RUN';
+        e.parentNode.insertBefore(button, e);
+    })
+</script>
+</body>
+</html>

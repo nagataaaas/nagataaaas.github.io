@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ながた の やるだけPython</title>
+    <script src="coi-serviceworker.js"></script>
+
+    <!--syntax highlight-->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+
+    <!--jquery-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/static/css/jquery-ui.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery.terminal@2.23.0/js/jquery.terminal.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/jquery.terminal@2.23.0/css/jquery.terminal.min.css" rel="stylesheet">
+
+
+    <!--pyodide-->
+    <script src="/static/js/terminal.js"></script>
+
+    <!--style-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/dracula.css">
+    <link rel="stylesheet" href="/static/css/terminal.css">
+
+    <!--style-->
+    <script src="/static/js/navigate.js"></script>
+
+</head>
+<body>
+<div id="terminal-container">
+    <div id="terminal-window" class="hidden">
+
+        <div class="header">
+            <span> 🐍 Python Interpreter</span>
+            <button onclick="closeConsole()"><span class="close-btn">&#8211;</span></button>
+        </div>
+        <div id="terminal"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="navigate"> <span class="chapter"><a href="/はじめに/目的と流れ/index.html">はじめに</a></span>
+<span class="section"><a href="/はじめに/目的と流れ/index.html">目的と流れ</a></span>
+<span class="chapter"><a href="/とっかかり/学びに必要な知識/index.html">とっかかり</a></span>
+<span class="section"><a href="/とっかかり/学びに必要な知識/index.html">学びに必要な知識</a></span>
+<span class="chapter"><a href="/型/primitive型/型とは.html">型</a></span>
+<span class="section"><a href="/型/primitive型/型とは.html">primitive型</a></span>
+<span class="page"><a href="/型/primitive型/型とは.html">型とは</a></span>
+<span class="page"><a href="/型/primitive型/数値型.html">数値型</a></span>
+<span class="page selected"><a href="/型/primitive型/シーケンス.html">シーケンス</a></span>
+</div>
+    <div id="main">
+        <div id="top">
+            <h1 id="title">やるだけPython</h1>
+            <h3 id="author" class="right">Yamato Nagata</h3>
+            <h3 id="email" class="right"><a href="mailto:nagata@mail.nagata.pro">nagata@mail.nagata.pro</a>
+            </h3>
+            <h3 class="right">last update: 07/22/2022</h3>
+        </div>
+        <div id="content">
+            <div class="toc">
+<ul>
+<li><a href="#_1">シーケンス</a><ul>
+<li><a href="#list">list</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="_1">シーケンス</h2>
+<p>そもそもシーケンスとはどういう意味でしょうか？シーケンスとは、「連続してひと続きになっているもの・順番・順序」という英単語(sequence)です。<br />
+つまり</p>
+<ul>
+<li>1つ以上のデータを1まとめにして</li>
+<li>ある要素の次は～といった情報をもつもの</li>
+</ul>
+<p>をシーケンスと呼べそうですね。</p>
+<p>Pythonでシーケンスと呼ばれるものは、複数のデータを位置や順序を保って保管する容器のようなものです。</p>
+<h3 id="list">list</h3>
+<p>listとは、英語で「配列」を意味する単語です。
+配列というとエンジニア以外にはあまり聞きなじみがないかもしれませんので、そのまま「リスト」と言った方が良いかもしれませんね。"欲しいものリスト"のリストです。  </p>
+<p>Pythonにおいては、ある意味を持った情報の集まり<code>list</code>を使ってデータひとまとめにします。</p>
+<pre class="codehilite"><code class="language-python">[1, 2, 3, 4, 5]
+</code></pre>
+
+<p>このように、角かっこ(あるいは大括弧/bracket)<code>[]</code>で囲み、カンマ<code>,</code>区切りでデータを記述します。</p>
+<p>1つのlistにどんな型の値でも入れることができ、listの中にlistを入れることもできます。</p>
+<pre class="codehilite"><code class="language-python">[1, 2.0, 3 + 4j, [5, [6]]]
+</code></pre>
+        </div>
+    </div>
+</div>
+
+
+<!--inject Run button-->
+<script>
+    document.querySelectorAll('pre > code').forEach(e => {
+        const button = document.createElement('button');
+        button.classList.add('run-button');
+        button.innerText = 'RUN';
+        e.parentNode.insertBefore(button, e);
+    })
+</script>
+</body>
+</html>

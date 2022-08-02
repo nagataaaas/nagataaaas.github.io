@@ -1,3 +1,3 @@
 # やるだけPython
 
-Markdownは [markdown to html](https://markdowntohtml.com/#converter)で変換しています。
+Markdownは [python-markdown](https://github.com/Python-Markdown/markdown)で変換しています。
