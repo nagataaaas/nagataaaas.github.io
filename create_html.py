@@ -70,12 +70,12 @@ class Chapter:
 
 
 def generate(chapters: list[Chapter], tree: list[Chapter]):
-    docs = pathlib.Path('docs')
-    docs.mkdir(exist_ok=True)
-    chapters[0].sections[0].pages[0].save_html(docs / 'index.html',
+    publish = pathlib.Path('publish')
+    publish.mkdir(exist_ok=True)
+    chapters[0].sections[0].pages[0].save_html(publish / 'index.html',
                                                create_navigate(tree, tree[0].sections[0].pages[0]))
     for c in chapters:
-        chap_path = docs / c.name
+        chap_path = publish / c.name
         chap_path.mkdir(parents=True, exist_ok=True)
         for s in c.sections:
             sec_path = chap_path / s.name
@@ -115,14 +115,14 @@ def compile_scss():
 
 
 def copy_static():
-    shutil.copytree('static/css', 'docs/static/css')
-    shutil.copytree('static/js', 'docs/static/js')
-    shutil.copytree('static/cdn', 'docs/static/cdn')
+    shutil.copytree('static/css', 'publish/static/css')
+    shutil.copytree('static/js', 'publish/static/js')
+    shutil.copytree('static/cdn', 'publish/static/cdn')
 
 
 if __name__ == '__main__':
-    if os.path.exists('docs'):
-        shutil.rmtree('docs')
+    if os.path.exists('publish'):
+        shutil.rmtree('publish')
     tree = get_tree()
     generate(tree, tree)
     compile_scss()
